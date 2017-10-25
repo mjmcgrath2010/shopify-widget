@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Widget</title>
+        <link rel="stylesheet" type="text/css" href="/static/css/widget.css" />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    </head>
+    <body>
+        <div id="base-alert" class="row">
+            <div class="card light-blue">
+              <div class="card-content white-text">
+                <p id="base-alert-text"></p>
+              </div>
+            </div>
+        </div>
+
+        <div id="widget-body">
+            <div id="view-container">
+            </div>
+            <div id="edit-container">
+                <div class="row header">
+                    Configuration
+                </div>
+                <div class="row body">
+                    <div class="section">
+                        <div class="title row">
+                            Form Source
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                              <textarea id="textarea1" class="materialize-textarea"></textarea>
+                              <label for="textarea1">Textarea</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <div class="title row">
+                            Buttons here
+                        </div>
+                        <div class="row">
+                            <p>
+                                <input name="group1" type="radio" id="test1" />
+                                <label id="testlabel1" for="test1">Red</label>
+                            </p>
+                            <p>
+                                <input name="group1" type="radio" id="test2" />
+                                <label id="testlabel2" for="test2">Yellow</label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="group1" type="radio" id="test3"  />
+                                <label id="testlabel3" for="test3">Green</label>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <div class="title row">
+                            Input here
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="testone" type="text" class="validate">
+                                <label for="testone">Input Field</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                    </div>
+                </div>
+                <div class="row footer">
+                    <div class="col s6">
+                    </div>
+                    <div class="col s3">
+                        <div class="waves-effect waves-light btn-flat">
+                            CANCEL
+                        </div>
+                    </div>
+                    <div class="col s3">
+                        <div class="waves-effect waves-light btn">
+                            SAVE
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+        <script type="text/javascript" src="//d2qrdklrsxowl2.cloudfront.net/js/hapyak-iframe.js"></script>
+        <script type="text/javascript" src="//d2qrdklrsxowl2.cloudfront.net/js/hapyak.api.js"></script>
+        <script type="text/javascript" src="/static/js/base.js"></script>
+        <script type="text/javascript" src="/static/js/widget_main.js"></script>
+        <script type="text/javascript" src="/static/js/widget_edit.js"></script>
+    </body>
+</html>

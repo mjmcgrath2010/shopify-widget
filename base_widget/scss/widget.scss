@@ -1,0 +1,198 @@
+$edit-primary-color: #db6327;
+$edit-accent-grey: #dbdbdb;
+$edit-grey: #9e9e9e;
+$edit-blue: #1892bf;
+
+@mixin transition($args...) {
+    -webkit-transition: $args;
+    -moz-transition: $args;
+    -ms-transition: $args;
+    -o-transition: $args;
+    transition: $args;
+}
+
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    $opacity-ie: $opacity * 100;
+    filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+@mixin slowShow($time) {
+    visibility: hidden;
+    @include opacity(0);
+
+    &.active{
+        visibility: visible;
+        @include opacity(1);
+        @include transition(opacity $time ease);
+    }
+}
+
+@mixin resetMargin() {
+    margin: 0;
+}
+
+#base-alert {
+    @include slowShow(1s);
+    @include resetMargin();
+    height: 0;
+
+    &.active{
+        height: auto;
+    }
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('//hapyak_demos.s3.amazonaws.com/fonts/Montserrat/Montserrat-Regular.eot');
+    src: local('Montserrat-Regular'), url('//hapyak_demos.s3.amazonaws.com/fonts/Montserrat/Montserrat-Regular.eot?#iefix') format('embedded-opentype'), url('//hapyak_demos.s3.amazonaws.com/fonts/Montserrat/Montserrat-Regular.woff2') format('woff2'), url('//hapyak_demos.s3.amazonaws.com/fonts/Montserrat/Montserrat-Regular.woff') format('woff'), url('//hapyak_demos.s3.amazonaws.com/fonts/Montserrat/Montserrat-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#widget-body {
+    @include slowShow(0.2s);
+
+    #view-container, #edit-container {
+      display: none;
+      overflow-x: hidden;
+
+        &.active {
+            display: block;
+        }
+    }
+
+    #view-container {
+        background: yellow;
+    }
+
+    #edit-container {
+        background: #FFF;
+        width: 100%;
+        height: 100vh;
+        font-family: 'Montserrat';
+
+        .row {
+            @include resetMargin();
+        }
+
+        .header, .footer {
+            @include resetMargin();
+            color: #FFF;
+            font-size: 32px;
+            width: 100%;
+            padding: 0 10px;
+            z-index: 3;
+        }
+
+        .header {
+            background: $edit-primary-color;
+            top: 0;
+            padding: 7px;
+        }
+        
+        .footer {
+            background: #FFF;
+            bottom: 0;
+            border-top: 1px solid #dbdbdb;
+            position: fixed;
+            width: 100%;
+            height: 50px;
+
+            .waves-effect.waves-light {
+                &.btn {
+                    background-color: #1892bf !important;
+                    color: #FFF;
+                }
+
+                &.btn, &.btn-flat {
+                    transform: translateZ(0);
+
+                    &:hover {
+                        transform: translateZ(1px);
+                    }
+                }
+            }
+        }
+
+        .body {
+            margin: 25px 0;
+            background: #FFF;
+
+            label {
+                &#testlabel1, &#testlabel2, &#testlabel3 {
+                    transform: translateZ(0);
+                }
+            }
+
+            .footer {
+                width: 100%;
+                position: relative;
+                height: 50px;
+                border: none;
+            }
+
+            .section {
+                @include resetMargin();
+
+                border: 1px solid $edit-accent-grey;
+                margin: 20px 20px 0 20px;
+
+                .title {
+                    @include resetMargin;
+                    text-transform: uppercase;
+                    font-size: 14px;
+                    color: $edit-primary-color;
+                    padding: 0 10px 14px 15px;
+                }
+
+                .label {
+                    color: $edit-grey;
+                }
+
+                label {
+                    left: 23px;
+
+                    &.active {
+                        color: $edit-primary-color;
+                    }
+                }
+
+                [type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:after,
+                [type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:before,
+                [type="radio"].with-gap:checked+label:after, [type="radio"]:checked+label:after,
+                [type="radio"].with-gap:checked+label:after, [type="radio"]:checked+label:after,
+                [type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:after,
+                [type="radio"].with-gap:checked+label:before, [type="radio"].with-gap:checked+label:after {
+                    background-color: $edit-primary-color;
+                    background-color: $edit-primary-color;
+                    box-shadow: 0 1px 0 0 $edit-primary-color;
+                }
+
+                [type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:before,
+                [type="radio"].with-gap:checked+label:after {
+                    border: 2px solid $edit-primary-color;
+                }
+
+                input[type=text]:not(.browser-default) {
+                    &:focus:not([readonly]) {
+                        box-shadow: none;
+                        border-bottom: 1px solid $edit-primary-color;
+                        padding-left: 2px;
+                    }
+                }
+
+                textarea.materialize-textarea {
+                    border: 1px solid #dbdbdb;
+                    box-sizing: border-box;
+                    min-height: 30px;
+                    padding-left: 1rem;
+
+                    &:focus:not([readonly]) {
+                        box-shadow: 0 1px 0 0 $edit-primary-color;
+                    }
+                }
+            }
+        }
+    }
+}
