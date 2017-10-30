@@ -1,3 +1,6 @@
+if (!describe) {
+    return;
+}
 describe('DOM Tests', function () { 
     var widgetBase = document.getElementById('widget-body');
 

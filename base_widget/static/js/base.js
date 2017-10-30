@@ -174,6 +174,7 @@ var widgetProps,
             }
 
             hapyak.context.addEventListener('annotationload', function hyDataAvailable (data) {
+                player = hapyak.widget.player;
                 cb && cb(hapyak.widget.player.isEditMode, data);
             }, false);
 

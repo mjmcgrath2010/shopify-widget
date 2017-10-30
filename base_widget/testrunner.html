@@ -44,13 +44,20 @@
             var reRun = document.getElementById('re-rerun');
 
             reRun && reRun.addEventListener('click', function () {
-              location.reload(true);
+                location.reload(true);
+            });
+
+            // setTimeout until we implement sinonjs for event listening
+            $(document).ready(function() {
+                setTimeout(function () {
+                    if (window.mochaPhantomJS) {
+                        mochaPhantomJS.run();
+                    } else {
+                        mocha.run();
+                    }
+                }, 5000);
             });
         </script>
         <script src="test/tests.js"></script>
-        <script>
-            if (window.mochaPhantomJS) { mochaPhantomJS.run(); }
-            else { mocha.run(); }
-        </script>
     </body>
 </html>
