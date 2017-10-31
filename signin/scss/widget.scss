@@ -1,0 +1,51 @@
+@import '../../scss/base.scss';  // Base widget scss
+
+#widget-body {
+    #view-container {
+        background: rgba(255, 255, 255, 0.95);
+        height: 100vh;
+        width: 100%;
+        padding: 40px;
+
+        #title {
+            text-align: center;
+            font-size: 36px;
+        }
+        #sub-title {
+            text-align: center;
+            font-size: 24px;
+        }
+        #fields {
+            padding-top: 50px;
+
+            .input-field input[type=text],
+            .input-field input[type=email] {
+                /* label focus color */
+                &::focus + label {
+                    color: #000;
+                }
+
+                /* label underline focus color */
+                &:focus {
+                    border-bottom: 1px solid #000;
+                    box-shadow: none;
+                }
+
+                /* valid/invalid color */
+                &.valid, &.invalid {
+                    border-bottom: 1px solid #000;
+                    box-shadow: none;
+                }
+            }
+
+            .input-field {
+                .prefix.active, label {
+                    color: #000;
+                }
+            }
+        }
+        #footer {
+
+        }
+    }
+}

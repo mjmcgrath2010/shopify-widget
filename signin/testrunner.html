@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title> Tests </title>
+        <link rel="stylesheet" href="./node_modules/mocha/mocha.css" />
+        <style>
+          body {
+            background: #FFF;
+          }
+        </style>
+    </head>
+    <body>
+        <div id="base-alert" class="row">
+            <div class="card light-blue">
+              <div class="card-content white-text">
+                <p id="base-alert-text"></p>
+              </div>
+            </div>
+        </div>
+
+        <div id="widget-body">
+            <h1>WIDGET HERE</h1>
+        </div>
+
+        <script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+        <script type="text/javascript" src="//d2qrdklrsxowl2.cloudfront.net/js/hapyak-iframe.js"></script>
+        <script type="text/javascript" src="//d2qrdklrsxowl2.cloudfront.net/js/hapyak.api.js"></script>
+        <script type="text/javascript" src="/static/js/base.js"></script>
+        <script type="text/javascript" src="/static/js/widget_main.js"></script>
+        <script type="text/javascript" src="/static/js/widget_edit.js"></script>
+
+        <button id="re-rerun">
+          Re-Run
+        </button>
+
+        <div id="mocha"></div>
+        <script src="./node_modules/mocha/mocha.js"></script>
+        <script src="./node_modules/chai/chai.js"></script>
+        <script>
+            mocha.ui('bdd'); 
+            mocha.reporter('html');
+            var expect = chai.expect;
+            var assert = chai.assert;
+            var reRun = document.getElementById('re-rerun');
+
+            reRun && reRun.addEventListener('click', function () {
+                location.reload(true);
+            });
+
+            // setTimeout until we implement sinonjs for event listening
+            $(document).ready(function() {
+                setTimeout(function () {
+                    if (window.mochaPhantomJS) {
+                        mochaPhantomJS.run();
+                    } else {
+                        mocha.run();
+                    }
+                }, 5000);
+            });
+        </script>
+        <script src="test/tests.js"></script>
+    </body>
+</html>

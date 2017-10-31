@@ -2,6 +2,11 @@ var widgetProps,
     widgetConfig,
     player;
 
+var hyWidget = {
+    didLoad: false,
+    mode: ''
+};
+
 (function () {
     window.widgetUtils = {
         dotget: function (obj, desc, d) {
@@ -65,7 +70,7 @@ var widgetProps,
 
             // hapyak.widget.env.set this needs to be checked
             if (action === 'set') {
-                hapyak.widget.env.set(prop, val, 'track', false);
+                hapyak.widget.env.set(prop, val, false, 'track');
             }
         },
         releaseGate: function () {
@@ -163,6 +168,16 @@ var widgetProps,
             
             $(elem).removeClass('active');
         },
+        reload: function (override) {
+            var url = window.location.origin + window.location.pathname + '?bust=' + Date.now(),
+                mode = widgetUtils.getParameterByName('mode');
+
+            if (!mode && override !== 'view') {
+                url += '&mode=edit'
+            }
+            
+            window.location.href = url;
+        },
         onWidgetLoad: function (cb) {
             var baseAlertText = document.getElementById('base-alert-text'),
                 baseAlertBox = document.getElementById('base-alert');
@@ -179,12 +194,17 @@ var widgetProps,
             }
 
             hapyak.context.addEventListener('annotationload', function hyDataAvailable (data) {
+                var isHyEditMode = hapyak.widget.player.isEditMode;
+
+                hyWidget.mode = isHyEditMode && widgetUtils.getParameterByName('mode') === 'edit' ? 'edit' : 'view';
+
                 player = hapyak.widget.player;
                 cb && cb(hapyak.widget.player.isEditMode, data);
             }, false);
 
             hapyak.context.addEventListener('editModeChange', function hyDataAvailable () {
-                location.reload(true); // Most dependable for fresh data 10/20/17
+                // location.reload(true); // Most dependable for fresh data 10/20/17
+                widgetUtils.reload('view');
             }, false);
         }
     },
