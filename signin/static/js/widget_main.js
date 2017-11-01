@@ -1,5 +1,7 @@
 (function () {
-    var init = function (isEditMode, data) {
+    var auth = null,
+        didSetup = false,
+        init = function (isEditMode, data) {
             if (hyWidget.mode === 'edit') {
                 return;
             }
@@ -20,16 +22,6 @@
 
             return auth && (auth.userId || auth.username);
         },
-        getAllValues = function () {
-            var inputValues = document.querySelectorAll('#fields input'),
-                inputs = {};
-
-            inputValues && inputValues.forEach(function (el) {
-                inputs[el.id || Date.now()] = el.value;
-            });
-
-            return inputs;
-        },
         validate = function (values) {
             // require all - figure out validation
             var name;
@@ -49,13 +41,10 @@
             widgetUtils.env('set', '_hapyakTrackingUser', userId);
             widgetUtils.env('set', '_hapyakTrackingUserName', username);
         },
-        auth = null,
-        didSetup = false,
         submit = function () {
-            var formValues = getAllValues();
+            var formValues = widgetUtils.getAllValues('#fields input');
 
             if (!validate(formValues)) {
-                console.log('invalid: ', formValues);
                 return;
             }
 
@@ -81,6 +70,10 @@
                 });
             }
 
+            if (widgetConfig) {
+                widgetUtils.applyConfig(widgetConfig);
+            }
+
             // if (auth.userId || auth.username) {
             //     dismissForm()
             //     return;
@@ -101,33 +94,3 @@
 
     widgetUtils.onWidgetLoad(init);
 }());
-
-// var config = {
-//     'bodyBackground': '',
-//     'title': {
-//         'color': '',
-//         'text': ''
-//     },
-//     'subTitle': {
-//         'color': '',
-//         'text': ''
-//     },
-//     'submitBtn': {
-//         'background': '',
-//         'color': '',
-//         'text': ''
-//     },
-//     'skipBtn': {
-//         'background': '',
-//         'color': '',
-//         'text': ''
-//     },
-//     'fields': [
-//         {
-//             'colors': {
-//                 'background': '',
-//                 'color': ''
-//             }
-//         }
-//     ]
-// };

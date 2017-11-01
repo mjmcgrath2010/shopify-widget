@@ -100,6 +100,8 @@ body, html {
         margin: 0;
         border: 1px solid #dbdbdb;
         margin: 20px 20px 0 20px; }
+        #widget-body #edit-container .body .section .margin-bottom {
+          margin-bottom: 20px; }
         #widget-body #edit-container .body .section .title {
           margin: 0;
           text-transform: uppercase;
@@ -168,5 +170,7 @@ body, html {
         box-shadow: none; }
     #widget-body #view-container #fields .input-field .prefix.active, #widget-body #view-container #fields .input-field label {
       color: #000; }
+  #widget-body #view-container #footer #submit-btn, #widget-body #view-container #footer button.btn-large, #widget-body #view-container #footer button.btn {
+    background: #1892bf; }
 
 /*# sourceMappingURL=widget.css.map */

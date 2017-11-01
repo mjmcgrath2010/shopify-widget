@@ -45,7 +45,9 @@
             }
         }
         #footer {
-
+            #submit-btn, button.btn-large, button.btn {
+                background: $edit-blue;
+            }
         }
     }
 }

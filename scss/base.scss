@@ -152,6 +152,10 @@ body, html {
                 border: 1px solid $edit-accent-grey;
                 margin: 20px 20px 0 20px;
 
+                .margin-bottom {
+                    margin-bottom: 20px;
+                }
+
                 .title {
                     @include resetMargin;
                     text-transform: uppercase;
@@ -199,7 +203,6 @@ body, html {
                 textarea.materialize-textarea {
                     border: 1px solid #dbdbdb;
                     box-sizing: border-box;
-                    min-height: 30px;
                     padding-left: 1rem;
 
                     &:focus:not([readonly]) {

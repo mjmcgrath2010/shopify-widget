@@ -53,6 +53,70 @@ var hyWidget = {
                 return true;
             }
         },
+        scrub: function (values) {
+            // for (val in values) {
+            //     if (values[val].type === 'checkbox') {
+            //         values[val].value = values[val].value === 'on' ? true : false;
+            //     }
+            // }
+
+            // return values;
+        },
+        applyConfig: function (config, isView) {
+            var prop,
+                trgt,
+                trgtEl;
+
+            for (prop in config) {
+                trgt = config[prop];
+                trgtEl = document.getElementById(trgt.viewid),
+                trgtEls = document.querySelectorAll('#view-container .' + trgt.viewclass);
+
+                if (trgt.propertyType === 'background' || trgt.propertyType === 'color') {
+                    if (trgtEl) {
+                        trgtEl.style[trgt.propertyType] = trgt.value;
+                    } else if (trgtEls) {
+                        trgtEls.forEach(function (el) {
+                            el.style[trgt.propertyType] = trgt.value;
+                        });
+                    }
+                }
+
+                if (trgtEl && trgt.propertyType === 'display') {
+                    trgtEl.style.display = trgt.value ? 'block' : 'none';
+                }
+
+                if (trgt.propertyType === 'text') {
+                    trgtEl.innerText = trgt.value;
+                }
+            }
+        },
+        getAllValues: function (querySelector) {
+            var inputValues = document.querySelectorAll(querySelector) || [],
+                inputs = {};
+
+            inputValues && inputValues.forEach(function (el) {
+                // Date.now() in case id is missing
+                var id = el.id ? el.id.replace('-value', '') : Date.now();
+
+                inputs[id] = {
+                    'value': el.type === 'checkbox' ? el.checked : el.value,
+                    'type': el.type
+                };
+
+                if (el.dataset.viewid) {
+                    inputs[id].viewid = el.dataset.viewid;
+                }
+                if (el.dataset.viewclass) {
+                    inputs[id].viewclass = el.dataset.viewclass;
+                }
+                if (el.dataset.propertyType) {
+                    inputs[id].propertyType = el.dataset.propertyType;
+                }
+            });
+
+            return inputs;
+        },
         track: {
             event: function (provider, type, props) {
                 if (provider === 'hy') {
@@ -158,7 +222,10 @@ var hyWidget = {
 
             if (height === '100%' && width === '100%') {
                 hapyak.widget.player.addClass(['hapyak-annotation-full-frame']);
+                return;
             }
+
+            hapyak.widget.player.removeClass(['hapyak-annotation-full-frame']);
         },
         display: function (elem, show) {
             if (show) {
