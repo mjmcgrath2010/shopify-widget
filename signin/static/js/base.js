@@ -46,21 +46,50 @@ var hyWidget = {
 
             return decodeURIComponent(results[2].replace(/\+/g, ' '));
         },
+        cookie: {
+            set: function (key, value, days) {
+                var expires;
+
+                if (days) {
+                    var date = new Date();
+
+                    date.setTime(date.getTime() + (days * 86400000));
+
+                    expires = '; expires=' + date.toGMTString();
+                } else {
+                    expires = '';
+                }
+
+                document.cookie = key + '=' + value + expires + '; path=/';
+            },
+            get: function (key) {
+                var identifier = key + '=',
+                    cookies = document.cookie.split(';');
+
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i];
+
+                    while (cookie.charAt(0) === ' ') {
+                        cookie = cookie.substring(1, cookie.length);
+                    }
+
+                    if (cookie.indexOf(identifier) === 0) {
+                        return cookie.substring(identifier.length, cookie.length);
+                    }
+                }
+
+                return null;
+            },
+            remove: function (key) {
+                this.set(key, '', -1);
+            }
+        },
         isIframed: function () {
             try {
                 return window.self !== window.top;
             } catch (e) {
                 return true;
             }
-        },
-        scrub: function (values) {
-            // for (val in values) {
-            //     if (values[val].type === 'checkbox') {
-            //         values[val].value = values[val].value === 'on' ? true : false;
-            //     }
-            // }
-
-            // return values;
         },
         applyConfig: function (config, isView) {
             var prop,
@@ -83,6 +112,9 @@ var hyWidget = {
                 }
 
                 if (trgtEl && trgt.propertyType === 'display') {
+                    if (trgt.value) {
+                        
+                    }
                     trgtEl.style.display = trgt.value ? 'block' : 'none';
                 }
 
@@ -278,6 +310,10 @@ var hyWidget = {
     init = function (isEditMode, data) {
         widgetProps = hapyak.widget.getProperties();
         widgetConfig = data && data.customConfig;
+
+        if (typeof(window) !== 'undefined') {
+            window.HapyakCookie = widgetUtils.cookie;
+        }
 
         hapyak.widget.tracking.disableClickTracking();
     };

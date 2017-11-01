@@ -56,8 +56,8 @@
                         <div class="col s3">
                         </div>
                         <div id="option-one" class="col s6 center-align input-field">
-                            <input id="option-one-input-field" type="text">
-                            <label class="active" for="option-one-input-field">Optional</label>
+                            <input id="option-one-view-input-field" type="text">
+                            <label id="option-one-text" class="active" for="option-one-view-input-field">Optional</label>
                         </div>
                         <div class="col s3">
                         </div>
@@ -116,7 +116,7 @@
                     </div>
                     <div class="section">
                         <div class="title row">
-                            Chicken Wings
+                            Fields
                         </div>
                         <div class="row margin-bottom">
                             <div class="col s6">
@@ -125,14 +125,14 @@
                             <div class="col s6">
                                 <div class="switch">
                                     <label>
-                                        Off
+                                        Hide
                                     <input id="first-name-value"
                                         data-editId="first-name-value" 
                                         data-input-type="boolean"
                                         data-property-type="display"
                                         data-viewId="first-name" class="config" checked type="checkbox">
                                     <span class="lever"></span>
-                                        On
+                                        Show
                                     </label>
                                 </div>
                             </div>
@@ -144,14 +144,14 @@
                             <div class="col s6">
                                 <div class="switch">
                                     <label>
-                                        Off
+                                        Hide
                                     <input id="last-name-value"
                                         data-editId="last-name-value" 
                                         data-input-type="boolean"
                                         data-property-type="display"
                                         data-viewId="last-name" class="config" checked type="checkbox">
                                     <span class="lever"></span>
-                                        On
+                                        Show
                                     </label>
                                 </div>
                             </div>
@@ -163,71 +163,38 @@
                             <div class="col s6">
                                 <div class="switch">
                                     <label>
-                                        Off
+                                        Hide
                                     <input id="email-address-value"
                                         data-editId="email-address-value" 
                                         data-input-type="boolean"
                                         data-property-type="display"
                                         data-viewId="email-address" class="config" checked type="checkbox">
                                     <span class="lever"></span>
-                                        On
+                                        Show
                                     </label>
                                 </div>
                             </div>
                         </div>
                         <div class="row margin-bottom">
-                            <div id="option-one-text" class="col s6">
-                                Option
+                            <div id="option" class="col s6">
+                                <textarea id="option-one-text-value"
+                                    data-editId="option-one-text-value"
+                                    data-input-type="text"
+                                    data-property-type="text"
+                                    data-viewId="option-one-text"
+                                    class="materialize-textarea config">Option</textarea>
                             </div>
                             <div class="col s6">
                                 <div class="switch">
                                     <label>
-                                        Off
+                                        Hide
                                     <input id="option-one-value"
                                         data-editId="option-one-value" 
                                         data-input-type="boolean"
                                         data-property-type="display"
                                         data-viewId="option-one" class="config" checked type="checkbox">
                                     <span class="lever"></span>
-                                        On
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row margin-bottom">
-                            <div class="col s6">
-                                Skip
-                            </div>
-                            <div class="col s6">
-                                <div class="switch">
-                                    <label>
-                                        Off
-                                    <input id="skip-value"
-                                        data-editId="skip-value" 
-                                        data-input-type="boolean"
-                                        data-property-type="display"
-                                        data-viewId="skip" class="config" checked type="checkbox">
-                                    <span class="lever"></span>
-                                        On
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row margin-bottom">
-                            <div class="col s6">
-                                Gated
-                            </div>
-                            <div class="col s6">
-                                <div class="switch">
-                                    <label>
-                                        Off
-                                    <input id="gated-value"
-                                        data-editId="gated-value" 
-                                        data-input-type="boolean"
-                                        data-property-type="display"
-                                        data-viewId="gated" class="config" checked type="checkbox">
-                                    <span class="lever"></span>
-                                        On
+                                        Show
                                     </label>
                                 </div>
                             </div>
@@ -278,6 +245,49 @@
                             </div>
                         </div>
                     </div>
+                    <div class="section">
+                        <div class="title row">
+                            Options
+                        </div>
+                        <div class="row margin-bottom">
+                            <div class="col s6">
+                                Skip
+                            </div>
+                            <div class="col s6">
+                                <div class="switch">
+                                    <label>
+                                        Hide
+                                    <input id="skip-value"
+                                        data-editId="skip-value" 
+                                        data-input-type="boolean"
+                                        data-property-type="display"
+                                        data-viewId="skip" class="config" checked type="checkbox">
+                                    <span class="lever"></span>
+                                        Show
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom">
+                            <div class="col s6">
+                                Gated
+                            </div>
+                            <div class="col s6">
+                                <div class="switch">
+                                    <label>
+                                        Hide
+                                    <input id="gated-value"
+                                        data-editId="gated-value" 
+                                        data-input-type="boolean"
+                                        data-property-type="display"
+                                        data-viewId="gated" class="config" checked type="checkbox">
+                                    <span class="lever"></span>
+                                        Show
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="footer">
                     </div>
                 </div>
@@ -305,5 +315,6 @@
         <script type="text/javascript" src="static/js/base.js"></script>
         <script type="text/javascript" src="static/js/widget_main.js"></script>
         <script type="text/javascript" src="static/js/widget_edit.js"></script>
+        <script type="//hapyak-widgets.s3.amazonaws.com/custom-form/js/jscolor.min.js">
     </body>
 </html>

@@ -164,6 +164,14 @@ body, html {
                     padding: 0 10px 14px 15px;
                 }
 
+                .switch label input[type=checkbox]:checked+.lever:after {
+                    background-color: $edit-primary-color;
+                }
+
+                .switch label input[type=checkbox]:checked+.lever {
+                    background-color: rgba(219, 99, 39, 0.6);
+                }
+
                 .label {
                     color: $edit-grey;
                 }
@@ -201,7 +209,8 @@ body, html {
                 }
 
                 textarea.materialize-textarea {
-                    border: 1px solid #dbdbdb;
+                    border: none;
+                    border-bottom: 1px solid #dbdbdb;
                     box-sizing: border-box;
                     padding-left: 1rem;
 

@@ -108,6 +108,10 @@ body, html {
           font-size: 14px;
           color: #db6327;
           padding: 0 10px 14px 15px; }
+        #widget-body #edit-container .body .section .switch label input[type=checkbox]:checked + .lever:after {
+          background-color: #db6327; }
+        #widget-body #edit-container .body .section .switch label input[type=checkbox]:checked + .lever {
+          background-color: rgba(219, 99, 39, 0.6); }
         #widget-body #edit-container .body .section .label {
           color: #9e9e9e; }
         #widget-body #edit-container .body .section label {
@@ -131,9 +135,9 @@ body, html {
           border-bottom: 1px solid #db6327;
           padding-left: 2px; }
         #widget-body #edit-container .body .section textarea.materialize-textarea {
-          border: 1px solid #dbdbdb;
+          border: none;
+          border-bottom: 1px solid #dbdbdb;
           box-sizing: border-box;
-          min-height: 30px;
           padding-left: 1rem; }
           #widget-body #edit-container .body .section textarea.materialize-textarea:focus:not([readonly]) {
             box-shadow: 0 1px 0 0 #db6327; }
