@@ -170,8 +170,13 @@ body, html {
       #widget-body #view-container #fields .input-field input[type=text].valid, #widget-body #view-container #fields .input-field input[type=text].invalid,
       #widget-body #view-container #fields .input-field input[type=email].valid,
       #widget-body #view-container #fields .input-field input[type=email].invalid {
-        border-bottom: 1px solid #000;
         box-shadow: none; }
+      #widget-body #view-container #fields .input-field input[type=text].valid,
+      #widget-body #view-container #fields .input-field input[type=email].valid {
+        border-bottom: 1px solid #000; }
+      #widget-body #view-container #fields .input-field input[type=text].invalid,
+      #widget-body #view-container #fields .input-field input[type=email].invalid {
+        border-bottom: 1px solid #F44336; }
     #widget-body #view-container #fields .input-field .prefix.active, #widget-body #view-container #fields .input-field label {
       color: #000; }
   #widget-body #view-container #footer #submit-btn, #widget-body #view-container #footer button.btn-large, #widget-body #view-container #footer button.btn {

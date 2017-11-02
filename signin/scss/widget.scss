@@ -33,8 +33,15 @@
 
                 /* valid/invalid color */
                 &.valid, &.invalid {
-                    border-bottom: 1px solid #000;
                     box-shadow: none;
+                }
+
+                &.valid {
+                    border-bottom: 1px solid #000;
+                }
+
+                &.invalid {
+                    border-bottom: 1px solid #F44336;
                 }
             }
 

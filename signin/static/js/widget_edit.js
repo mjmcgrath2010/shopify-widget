@@ -8,25 +8,18 @@
             }
 
             hapyak.context.quickedit.doubleClick.disable();
-            player.pause();
 
             initMaterialize();
             saveBtn && saveBtn.addEventListener('click', function () {
+
                 saveSettings();
             }, false);
             cancelBtn && cancelBtn.addEventListener('click', function () {
                 widgetUtils.reload('view');
             }, false);
         },
-        setupDefaults = function () {
-            // widgetUtils.setBaseProp('precondition', '!loginComplete');
-            // widgetUtils.setBaseProp('top', '0%');
-            // widgetUtils.setBaseProp('left', '0%');
-        },
         ready = function () {
             var trgtEl;
-
-            setupDefaults();
 
             if (widgetConfig) {
                 for (key in widgetConfig) {
@@ -40,6 +33,7 @@
                 }
             }
 
+            player.pause();
             widgetUtils.tempFrameSize('100%', '50%');
             widgetUtils.display('#widget-body', true);
             widgetUtils.display('#edit-container', true);
@@ -70,6 +64,8 @@
                     class="config" checked type="checkbox">
             */
             var config = widgetUtils.getAllValues('#edit-container input.config, #edit-container textarea.config');
+
+            var baseProps = widgetUtils.getAllValues('#edit-container input.base-prop, #edit-container textarea.base-prop');
 
             baseProps && widgetUtils.setBaseProps(baseProps);
             config && widgetUtils.setConfig(config);

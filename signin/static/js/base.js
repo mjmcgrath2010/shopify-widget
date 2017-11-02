@@ -112,9 +112,6 @@ var hyWidget = {
                 }
 
                 if (trgtEl && trgt.propertyType === 'display') {
-                    if (trgt.value) {
-                        
-                    }
                     trgtEl.style.display = trgt.value ? 'block' : 'none';
                 }
 

@@ -1,11 +1,20 @@
 (function () {
     var auth = null,
         didSetup = false,
+        inEditor = false,
+        widgetData = null,
         init = function (isEditMode, data) {
             var user = existingUserInfo();
 
+            widgetData = data;
+            inEditor = hyWidget.mode === 'view' &&  hapyak.widget.player.isEditMode;
+
             if (hyWidget.mode === 'edit') {
                 return;
+            }
+
+            if (inEditor) {
+                setup();
             }
 
             if (isAuthed()) {
@@ -14,11 +23,12 @@
             }
 
             if (user.userCookie && user.userCookie !== '') {
-                setAuthInfo(user.userCookie, user.userNameCookie);
+                authAndTrack(user.userCookie, user.userNameCookie);
                 signinComplete();
                 return;
             }
 
+            // Init evt listener for `authchange`
             hapyak.context.addEventListener('authchange', function (authInfo) {
                 if (authInfo.userId) {
                     signinComplete();
@@ -50,22 +60,35 @@
             return auth && (auth.userId || auth.username);
         },
         validate = function (values) {
-            var name;
+            var available = ['first-name', 'last-name', 'option-one', 'email-address'],
+                isValid = true;
 
-            var available = ['first-name', 'last-name', 'option-one', 'email-address'];
-
-            return widgetConfig && available.every(function (field) {
-                var field = widgetConfig[field];
+            widgetConfig && available.forEach(function (field) {
+                var field = widgetConfig[field],
+                    viewId = field && field.viewid + '-view-input-field',
+                    trgtEl = viewId && document.getElementById(viewId);
 
                 // If the field is not present, then count as true
                 if (!field.value) {
-                    return true;
+                    return;
                 }
 
-                return field && field.value && values[field.viewid + '-view-input-field'].value;
+                if (values[viewId].value) {
+                    trgtEl.className = trgtEl.className.replace(/invalid/g, '');
+                    return;
+                }
+                
+                trgtEl.className = trgtEl.className += ' invalid';
+                isValid = false;
             });
+
+            return isValid;
         },
-        setAuthInfo = function (userId, username) {
+        authAndTrack = function (userId, username) {
+            if (inEditor || !userId) {
+                return;
+            }
+
             window.HapyakCookie.set('_hapyakTrackingUser', userId);
             window.HapyakCookie.set('_hapyakTrackingUserName', username);
 
@@ -77,10 +100,11 @@
                 username: username
             });
 
-            hapyak.context.tracking.action('leadGen', {
+            widgetUtils.track.event('hy', 'leadGen', {
                 userId: userId,
                 username: username,
-                tag: 'iframe_signin'
+                tag: 'widget_signin',
+                widgetName: widgetData && widgetData.customWidget || ''
             });
         },
         submit = function () {
@@ -90,11 +114,17 @@
                 return;
             }
 
-            setAuthInfo(formValues['email-address-view-input-field'].value,
+            widgetUtils.track.click('submit', 'click');
+
+            authAndTrack(formValues['email-address-view-input-field'].value,
                         formValues['first-name-view-input-field'].value +
                         formValues['last-name-view-input-field'].value);
         },
         signinComplete = function () {
+            if (inEditor) {
+                return;
+            }
+
             // sigin complete logic
             hapyak.widget.releaseGate();
             widgetUtils.tempFrameSize('0%', '0%');
@@ -113,14 +143,13 @@
         setup = function () {
             var submitBtn = document.getElementById('submit-btn'),
                 skipBtn = document.getElementById('skip'),
-                hasFirstName = widgetConfig['first-name'].value,
-                hasLastName = widgetConfig['last-name'].value,
                 updateColumns = function (id) {
-                    trgtEl = document.getElementById(id);
+                    var trgtEl = document.getElementById(id);
                     trgtEl.className = trgtEl.className.replace('s3', 's6');
                 };
 
-            var trgtEl;
+            var hasFirstName,
+                hasLastName;
 
             setupToggle();
 
@@ -132,18 +161,29 @@
 
             if (widgetConfig) {
                 widgetUtils.applyConfig(widgetConfig);
+                hasFirstName = widgetConfig['first-name'].value;
+                hasLastName = widgetConfig['last-name'].value;
 
                 if (hasFirstName && !hasLastName) {
                     updateColumns('first-name');
                 } else if (!hasFirstName && hasLastName) {
                     updateColumns('last-name');
                 }
+
+                // Explicitly check value is false
+                if (widgetConfig['gated'].value === false) {
+                    hapyak.widget.releaseGate();
+                }
             }
 
             submitBtn && submitBtn.addEventListener('click', submit, false);
-            skipBtn && skipBtn.addEventListener('click', signinComplete, false);
+            skipBtn && skipBtn.addEventListener('click', function () {
+                widgetUtils.track.click('skip', 'click');
+                signinComplete();
+            }, false);
 
             Materialize.updateTextFields && Materialize.updateTextFields();
+            player.pause();
             widgetUtils.tempFrameSize('100%', '100%');
             widgetUtils.display('#widget-body', true);
             widgetUtils.display('#view-container', true);
