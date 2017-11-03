@@ -14,6 +14,9 @@
               </div>
             </div>
         </div>
+        <div id="change-mode" class="btn-large waves-effect waves-light">
+            Edit
+        </div>
 
         <div id="widget-body">
             <div id="view-container">
@@ -25,42 +28,123 @@
                 <div class="row body">
                     <div class="section">
                         <div class="title row">
-                            Form Source
+                            Input Example
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                              <textarea id="textarea1" class="materialize-textarea"></textarea>
-                              <label for="textarea1">Textarea</label>
+                                <textarea id="title-value"
+                                    data-editId="title-value"
+                                    data-input-type="text"
+                                    data-property-type="text"
+                                    data-viewId="title"
+                                    class="materialize-textarea config">Welcome</textarea>
+                              <label for="title-value">Title</label>
                             </div>
                         </div>
                     </div>
                     <div class="section">
                         <div class="title row">
-                            Buttons here
+                            Toggle Example
                         </div>
-                        <div class="row">
-                            <p>
-                                <input name="group1" type="radio" id="test1" />
-                                <label id="testlabel1" for="test1">Red</label>
-                            </p>
-                            <p>
-                                <input name="group1" type="radio" id="test2" />
-                                <label id="testlabel2" for="test2">Yellow</label>
-                            </p>
-                            <p>
-                                <input class="with-gap" name="group1" type="radio" id="test3"  />
-                                <label id="testlabel3" for="test3">Green</label>
-                            </p>
+                        <div class="row margin-bottom">
+                            <div class="col s6">
+                                First Name
+                            </div>
+                            <div class="col s6">
+                                <div class="switch">
+                                    <label>
+                                        Hide
+                                    <input id="first-name-value"
+                                        data-editId="first-name-value" 
+                                        data-input-type="boolean"
+                                        data-property-type="display"
+                                        data-viewId="first-name" class="config" checked type="checkbox">
+                                    <span class="lever"></span>
+                                        Show
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom">
+                            <div id="option" class="col s6">
+                                <textarea id="option-one-text-value"
+                                    data-editId="option-one-text-value"
+                                    data-input-type="text"
+                                    data-property-type="text"
+                                    data-viewId="option-one-text"
+                                    class="materialize-textarea config">Option</textarea>
+                            </div>
+                            <div class="col s6">
+                                <div class="switch">
+                                    <label>
+                                        Hide
+                                    <input id="option-one-value"
+                                        data-editId="option-one-value" 
+                                        data-input-type="boolean"
+                                        data-property-type="display"
+                                        data-viewId="option-one" class="config" checked type="checkbox">
+                                    <span class="lever"></span>
+                                        Show
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="section">
                         <div class="title row">
-                            Input here
+                            Color Example
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input id="testone" type="text" class="validate">
-                                <label for="testone">Input Field</label>
+                                <textarea id="background-color-value"
+                                    data-editId="background-color-value" 
+                                    data-input-type="text"
+                                    data-property-type="background"
+                                    data-viewId="view-container" class="materialize-textarea config">rgba(255, 255, 255, 0.7)</textarea>
+                              <label for="background-color-value">Widget Background Color</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <div class="title row">
+                            Option Example
+                        </div>
+                        <div class="row margin-bottom">
+                            <div class="col s6">
+                                Skip
+                            </div>
+                            <div class="col s6">
+                                <div class="switch">
+                                    <label>
+                                        Hide
+                                    <input id="skip-value"
+                                        data-editId="skip-value" 
+                                        data-input-type="boolean"
+                                        data-property-type="display"
+                                        data-viewId="skip" class="config" checked type="checkbox">
+                                    <span class="lever"></span>
+                                        Show
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom">
+                            <div class="col s6">
+                                Gated
+                            </div>
+                            <div class="col s6">
+                                <div class="switch">
+                                    <label>
+                                        Inactive
+                                    <input id="gated-value"
+                                        data-editId="gated-value" 
+                                        data-input-type="boolean"
+                                        data-property-type="display"
+                                        data-viewId="gated" class="config base-prop" checked type="checkbox">
+                                    <span class="lever"></span>
+                                        Active
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -71,12 +155,12 @@
                     <div class="col s6">
                     </div>
                     <div class="col s3">
-                        <div class="waves-effect waves-light btn-flat">
+                        <div id="cancel-widget-config" class="waves-effect waves-light btn-flat">
                             CANCEL
                         </div>
                     </div>
                     <div class="col s3">
-                        <div class="waves-effect waves-light btn">
+                        <div id="save-widget-config" class="waves-effect waves-light btn">
                             SAVE
                         </div>
                     </div>
@@ -91,5 +175,6 @@
         <script type="text/javascript" src="static/js/base.js"></script>
         <script type="text/javascript" src="static/js/widget_main.js"></script>
         <script type="text/javascript" src="static/js/widget_edit.js"></script>
+        <script type="//hapyak-widgets.s3.amazonaws.com/custom-form/js/jscolor.min.js">
     </body>
 </html>

@@ -1,6 +1,11 @@
-var widgetProps,
-    widgetConfig,
-    player;
+var player;
+
+var hyWidget = {
+    didLoad: false,
+    props: {},
+    config: {},
+    mode: ''
+};
 
 (function () {
     window.widgetUtils = {
@@ -41,12 +46,105 @@ var widgetProps,
 
             return decodeURIComponent(results[2].replace(/\+/g, ' '));
         },
+        cookie: {
+            set: function (key, value, days) {
+                var expires;
+
+                if (days) {
+                    var date = new Date();
+
+                    date.setTime(date.getTime() + (days * 86400000));
+
+                    expires = '; expires=' + date.toGMTString();
+                } else {
+                    expires = '';
+                }
+
+                document.cookie = key + '=' + value + expires + '; path=/';
+            },
+            get: function (key) {
+                var identifier = key + '=',
+                    cookies = document.cookie.split(';');
+
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i];
+
+                    while (cookie.charAt(0) === ' ') {
+                        cookie = cookie.substring(1, cookie.length);
+                    }
+
+                    if (cookie.indexOf(identifier) === 0) {
+                        return cookie.substring(identifier.length, cookie.length);
+                    }
+                }
+
+                return null;
+            },
+            remove: function (key) {
+                this.set(key, '', -1);
+            }
+        },
         isIframed: function () {
             try {
                 return window.self !== window.top;
             } catch (e) {
                 return true;
             }
+        },
+        applyConfig: function (config, isView) {
+            var prop,
+                trgt,
+                trgtEl;
+
+            for (prop in config) {
+                trgt = config[prop];
+                trgtEl = document.getElementById(trgt.viewid),
+                trgtEls = document.querySelectorAll('#view-container .' + trgt.viewclass);
+
+                if (trgt.propertyType === 'background' || trgt.propertyType === 'color') {
+                    if (trgtEl) {
+                        trgtEl.style[trgt.propertyType] = trgt.value;
+                    } else if (trgtEls) {
+                        trgtEls.forEach(function (el) {
+                            el.style[trgt.propertyType] = trgt.value;
+                        });
+                    }
+                }
+
+                if (trgtEl && trgt.propertyType === 'display') {
+                    trgtEl.style.display = trgt.value ? 'block' : 'none';
+                }
+
+                if (trgt.propertyType === 'text') {
+                    trgtEl.innerText = trgt.value;
+                }
+            }
+        },
+        getAllValues: function (querySelector) {
+            var inputValues = document.querySelectorAll(querySelector) || [],
+                inputs = {};
+
+            inputValues && inputValues.forEach(function (el) {
+                // Date.now() in case id is missing
+                var id = el.id ? el.id.replace('-value', '') : Date.now();
+
+                inputs[id] = {
+                    'value': el.type === 'checkbox' ? el.checked : el.value,
+                    'type': el.type
+                };
+
+                if (el.dataset.viewid) {
+                    inputs[id].viewid = el.dataset.viewid;
+                }
+                if (el.dataset.viewclass) {
+                    inputs[id].viewclass = el.dataset.viewclass;
+                }
+                if (el.dataset.propertyType) {
+                    inputs[id].propertyType = el.dataset.propertyType;
+                }
+            });
+
+            return inputs;
         },
         track: {
             event: function (provider, type, props) {
@@ -65,7 +163,7 @@ var widgetProps,
 
             // hapyak.widget.env.set this needs to be checked
             if (action === 'set') {
-                hapyak.widget.env.set(prop, val, 'track', false);
+                hapyak.widget.env.set(prop, val, false, 'track');
             }
         },
         releaseGate: function () {
@@ -153,7 +251,10 @@ var widgetProps,
 
             if (height === '100%' && width === '100%') {
                 hapyak.widget.player.addClass(['hapyak-annotation-full-frame']);
+                return;
             }
+
+            hapyak.widget.player.removeClass(['hapyak-annotation-full-frame']);
         },
         display: function (elem, show) {
             if (show) {
@@ -162,6 +263,16 @@ var widgetProps,
             }
             
             $(elem).removeClass('active');
+        },
+        reload: function (override) {
+            var url = window.location.origin + window.location.pathname + '?bust=' + Date.now(),
+                mode = widgetUtils.getParameterByName('mode');
+
+            if (!mode && override !== 'view') {
+                url += '&mode=edit'
+            }
+            
+            window.location.href = url;
         },
         onWidgetLoad: function (cb) {
             var baseAlertText = document.getElementById('base-alert-text'),
@@ -179,18 +290,26 @@ var widgetProps,
             }
 
             hapyak.context.addEventListener('annotationload', function hyDataAvailable (data) {
+                var isHyEditMode = hapyak.widget.player.isEditMode;
+
+                hyWidget.mode = isHyEditMode && widgetUtils.getParameterByName('mode') === 'edit' ? 'edit' : 'view';
+
                 player = hapyak.widget.player;
                 cb && cb(hapyak.widget.player.isEditMode, data);
             }, false);
 
             hapyak.context.addEventListener('editModeChange', function hyDataAvailable () {
-                location.reload(true); // Most dependable for fresh data 10/20/17
+                widgetUtils.reload('view');
             }, false);
         }
     },
     init = function (isEditMode, data) {
-        widgetProps = hapyak.widget.getProperties();
-        widgetConfig = data && data.customConfig;
+        hyWidget.props = hapyak.widget.getProperties();
+        hyWidget.config = data && data.customConfig;
+
+        if (typeof(window) !== 'undefined') {
+            window.HapyakCookie = widgetUtils.cookie;
+        }
 
         hapyak.widget.tracking.disableClickTracking();
     };

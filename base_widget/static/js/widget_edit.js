@@ -1,15 +1,42 @@
 (function () {
     var init = function (isEditMode, data) {
-            if (!isEditMode) {
+            var saveBtn = document.getElementById('save-widget-config'),
+                cancelBtn = document.getElementById('cancel-widget-config');
+
+            hapyak.context.quickedit.doubleClick.disable();
+
+            if (!hapyak.widget.player.isEditMode || hyWidget.mode !== 'edit') {
                 return;
             }
 
-            hapyak.context.quickedit.doubleClick.disable();
-            player.pause();
-
             initMaterialize();
+            saveBtn && saveBtn.addEventListener('click', saveSettings, false);
+            cancelBtn && cancelBtn.addEventListener('click', function () {
+                widgetUtils.reload('view');
+            }, false);
         },
         ready = function () {
+            var trgtEl;
+            var config = hyWidget.config;
+
+            if (config) {
+                for (key in config) {
+                    trgtEl = document.getElementById(key + '-value');
+
+                    if (!trgtEl) {
+                        return;
+                    }
+
+                    if (config[key].propertyType === 'display') {
+                        trgtEl.checked = config[key].value;
+                    } else {
+                        trgtEl.innerText = config[key].value;
+                    }
+                }
+            }
+
+            player && player.pause();
+            widgetUtils.tempFrameSize('100%', '50%');
             widgetUtils.display('#widget-body', true);
             widgetUtils.display('#edit-container', true);
         },
@@ -28,9 +55,25 @@
                 init();
             });
         },
-        saveSettings = function (baseProps, config) {
+        saveSettings = function () {
+            /*
+                Example input el:
+                <textarea id="title-value"
+                    data-editId="title-value"
+                    data-input-type="text"
+                    data-property-type="text"
+                    data-viewId="title"
+                    class="materialize-textarea config">Default Text</textarea>
+
+                data-property-type : `text`, `display`, `background`, `color`, `etc`
+            */
+            var querySelect = '#edit-container input.trgtProp, #edit-container textarea.trgtProp'
+                config = widgetUtils.getAllValues(querySelect.replace(/trgtProp/g, 'config')),
+                baseProps = widgetUtils.getAllValues(querySelect.replace(/trgtProp/g, 'base-prop'));
+
             baseProps && widgetUtils.setBaseProps(baseProps);
             config && widgetUtils.setConfig(config);
+            widgetUtils.reload('view');
         };
 
     widgetUtils.onWidgetLoad(init);
