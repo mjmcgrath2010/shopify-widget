@@ -1,9 +1,9 @@
-var widgetProps,
-    widgetConfig,
-    player;
+var player;
 
 var hyWidget = {
     didLoad: false,
+    props: {},
+    config: {},
     mode: ''
 };
 
@@ -299,14 +299,13 @@ var hyWidget = {
             }, false);
 
             hapyak.context.addEventListener('editModeChange', function hyDataAvailable () {
-                // location.reload(true); // Most dependable for fresh data 10/20/17
                 widgetUtils.reload('view');
             }, false);
         }
     },
     init = function (isEditMode, data) {
-        widgetProps = hapyak.widget.getProperties();
-        widgetConfig = data && data.customConfig;
+        hyWidget.props = hapyak.widget.getProperties();
+        hyWidget.config = data && data.customConfig;
 
         if (typeof(window) !== 'undefined') {
             window.HapyakCookie = widgetUtils.cookie;

@@ -20,20 +20,21 @@
         },
         ready = function () {
             var trgtEl;
+            var config = hyWidget.config;
 
-            if (widgetConfig) {
-                for (key in widgetConfig) {
+            if (config) {
+                for (key in config) {
                     trgtEl = document.getElementById(key + '-value');
 
-                    if (widgetConfig[key].propertyType === 'display') {
-                        trgtEl.checked = widgetConfig[key].value
+                    if (config[key].propertyType === 'display') {
+                        trgtEl.checked = config[key].value
                     } else {
-                        trgtEl.innerText = widgetConfig[key].value;
+                        trgtEl.innerText = config[key].value;
                     }
                 }
             }
 
-            player.pause();
+            player && player.pause();
             widgetUtils.tempFrameSize('100%', '50%');
             widgetUtils.display('#widget-body', true);
             widgetUtils.display('#edit-container', true);

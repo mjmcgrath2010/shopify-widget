@@ -61,10 +61,11 @@
         },
         validate = function (values) {
             var available = ['first-name', 'last-name', 'option-one', 'email-address'],
+                config = hyWidget.config;
                 isValid = true;
 
-            widgetConfig && available.forEach(function (field) {
-                var field = widgetConfig[field],
+            config && available.forEach(function (field) {
+                var field = config[field],
                     viewId = field && field.viewid + '-view-input-field',
                     trgtEl = viewId && document.getElementById(viewId);
 
@@ -143,6 +144,7 @@
         setup = function () {
             var submitBtn = document.getElementById('submit-btn'),
                 skipBtn = document.getElementById('skip'),
+                config = hyWidget.config,
                 updateColumns = function (id) {
                     var trgtEl = document.getElementById(id);
                     trgtEl.className = trgtEl.className.replace('s3', 's6');
@@ -159,10 +161,10 @@
 
             didSetup = true;
 
-            if (widgetConfig) {
-                widgetUtils.applyConfig(widgetConfig);
-                hasFirstName = widgetConfig['first-name'].value;
-                hasLastName = widgetConfig['last-name'].value;
+            if (config) {
+                widgetUtils.applyConfig(config);
+                hasFirstName = config['first-name'].value;
+                hasLastName = config['last-name'].value;
 
                 if (hasFirstName && !hasLastName) {
                     updateColumns('first-name');
@@ -171,7 +173,7 @@
                 }
 
                 // Explicitly check value is false
-                if (widgetConfig['gated'].value === false) {
+                if (config['gated'].value === false) {
                     hapyak.widget.releaseGate();
                 }
             }
@@ -183,7 +185,7 @@
             }, false);
 
             Materialize.updateTextFields && Materialize.updateTextFields();
-            player.pause();
+            player && player.pause();
             widgetUtils.tempFrameSize('100%', '100%');
             widgetUtils.display('#widget-body', true);
             widgetUtils.display('#view-container', true);
