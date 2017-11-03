@@ -103,7 +103,7 @@
             widgetUtils.track.event('hy', 'leadGen', {
                 userId: userId,
                 username: username,
-                tag: 'widget_signin',
+                widget: 'widget_signin',
                 widgetName: widgetData && widgetData.customWidget || ''
             });
         },
@@ -114,7 +114,7 @@
                 return;
             }
 
-            widgetUtils.track.click('submit', 'click');
+            // widgetUtils.track.click('submit', 'click');
 
             authAndTrack(formValues['email-address-view-input-field'].value,
                         formValues['first-name-view-input-field'].value +
@@ -178,7 +178,7 @@
 
             submitBtn && submitBtn.addEventListener('click', submit, false);
             skipBtn && skipBtn.addEventListener('click', function () {
-                widgetUtils.track.click('skip', 'click');
+                // widgetUtils.track.click('skip', 'click');
                 signinComplete();
             }, false);
 
