@@ -37,10 +37,7 @@ This widget will play a supplemental video, embedded on top of a main video. The
          1.  Create or use scss file
          2.  Install sass if not present `http://sass-lang.com/install`
          3.  Run `gulp sass-watch`
- 
- - Deployment
-     - Widgets should be run through an uglifier and minified before deployment
- 
+  
  - Tests
      - Base tests are kept in `/tests.js`
      - Chai and Mocha can be installed via npm install
