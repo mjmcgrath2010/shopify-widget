@@ -1,3 +1,6 @@
+/*globals hapyak, widgetUtils, hyWidget */
+'use strict';
+
 (function () {
     var didSetup = false,
         inEditor = false,

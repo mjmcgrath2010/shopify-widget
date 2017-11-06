@@ -1,13 +1,14 @@
-var player;
-
-var hyWidget = {
-    didLoad: false,
-    props: {},
-    config: {},
-    mode: ''
-};
+/*globals hapyak, $, widgetUtils, hyWidget, player */
+'use strict';
 
 (function () {
+    window.player = {};
+    window.hyWidget = {
+        didLoad: false,
+        props: {},
+        config: {},
+        mode: ''
+    };
     window.widgetUtils = {
         dotget: function (obj, desc, d) {
             var value,
@@ -37,7 +38,7 @@ var hyWidget = {
             results = regex.exec(url);
 
             if (!results) {
-                return null;
+                return '';
             }
 
             if (!results[2]) {
@@ -48,11 +49,11 @@ var hyWidget = {
         },
         cookie: {
             set: function (key, value, days) {
-                var expires;
+                var expires,
+                    date;
 
                 if (days) {
-                    var date = new Date();
-
+                    date = new Date();
                     date.setTime(date.getTime() + (days * 86400000));
 
                     expires = '; expires=' + date.toGMTString();
@@ -63,11 +64,14 @@ var hyWidget = {
                 document.cookie = key + '=' + value + expires + '; path=/';
             },
             get: function (key) {
+                var cookie,
+                    i;
+
                 var identifier = key + '=',
                     cookies = document.cookie.split(';');
 
-                for (var i = 0; i < cookies.length; i++) {
-                    var cookie = cookies[i];
+                for (i = 0; i < cookies.length; i++) {
+                    cookie = cookies[i];
 
                     while (cookie.charAt(0) === ' ') {
                         cookie = cookie.substring(1, cookie.length);
@@ -85,16 +89,18 @@ var hyWidget = {
             }
         },
         isIframed: function () {
+            // try/catch to handel security exception
             try {
                 return window.self !== window.top;
             } catch (e) {
                 return true;
             }
         },
-        applyConfig: function (config, isView) {
+        applyConfig: function (config) {
             var prop,
                 trgt,
-                trgtEl;
+                trgtEl,
+                trgtEls;
 
             for (prop in config) {
                 trgt = config[prop];
@@ -269,7 +275,7 @@ var hyWidget = {
                 mode = widgetUtils.getParameterByName('mode');
 
             if (!mode && override !== 'view') {
-                url += '&mode=edit'
+                url += '&mode=edit';
             }
             
             window.location.href = url;
@@ -280,7 +286,7 @@ var hyWidget = {
             if (!widgetUtils.isIframed()) {
                 widgetUtils.display('#widget-body', true);
                 widgetUtils.display('#base-alert', true);
-                baseAlertText.innerText = 'Some features may not be available outside of the HapYak iframe domain.'
+                baseAlertText.innerText = 'Some features may not be available outside of the HapYak iframe domain.';
                 return;
             }
 
@@ -288,7 +294,6 @@ var hyWidget = {
                 var isHyEditMode = hapyak.widget.player.isEditMode;
 
                 hyWidget.mode = isHyEditMode && widgetUtils.getParameterByName('mode') === 'edit' ? 'edit' : 'view';
-
                 player = hapyak.widget.player;
                 cb && cb(hapyak.widget.player.isEditMode, data);
             }, false);
@@ -297,8 +302,8 @@ var hyWidget = {
                 widgetUtils.reload('view');
             }, false);
         }
-    },
-    init = function (isEditMode, data) {
+    };
+    var init = function (isEditMode, data) {
         hyWidget.props = hapyak.widget.getProperties();
         hyWidget.config = data && data.customConfig;
 

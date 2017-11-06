@@ -32,6 +32,14 @@ $edit-blue: #1892bf;
     margin: 0;
 }
 
+@font-face {
+    font-family: 'Montserrat';
+    src: url('//hapyak_demos.s3.amazonaws.com/fonts/Montserrat/Montserrat-Regular.eot');
+    src: local('Montserrat-Regular'), url('//hapyak_demos.s3.amazonaws.com/fonts/Montserrat/Montserrat-Regular.eot?#iefix') format('embedded-opentype'), url('//hapyak_demos.s3.amazonaws.com/fonts/Montserrat/Montserrat-Regular.woff2') format('woff2'), url('//hapyak_demos.s3.amazonaws.com/fonts/Montserrat/Montserrat-Regular.woff') format('woff'), url('//hapyak_demos.s3.amazonaws.com/fonts/Montserrat/Montserrat-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 #base-alert {
     @include slowShow(1s);
     @include resetMargin();
@@ -42,12 +50,18 @@ $edit-blue: #1892bf;
     }
 }
 
-@font-face {
-    font-family: 'Montserrat';
-    src: url('//hapyak_demos.s3.amazonaws.com/fonts/Montserrat/Montserrat-Regular.eot');
-    src: local('Montserrat-Regular'), url('//hapyak_demos.s3.amazonaws.com/fonts/Montserrat/Montserrat-Regular.eot?#iefix') format('embedded-opentype'), url('//hapyak_demos.s3.amazonaws.com/fonts/Montserrat/Montserrat-Regular.woff2') format('woff2'), url('//hapyak_demos.s3.amazonaws.com/fonts/Montserrat/Montserrat-Regular.woff') format('woff'), url('//hapyak_demos.s3.amazonaws.com/fonts/Montserrat/Montserrat-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+#change-mode {
+    background: $edit-primary-color;
+    color: #FFF;
+    position: absolute;
+    display: none;
+    right: 20px;
+    top: 20px;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
 }
 
 #widget-body {
@@ -63,7 +77,7 @@ $edit-blue: #1892bf;
     }
 
     #view-container {
-        background: yellow;
+        background: rgba(255, 255, 255, 0);
     }
 
     #edit-container {
@@ -138,12 +152,24 @@ $edit-blue: #1892bf;
                 border: 1px solid $edit-accent-grey;
                 margin: 20px 20px 0 20px;
 
+                .margin-bottom {
+                    margin-bottom: 20px;
+                }
+
                 .title {
                     @include resetMargin;
                     text-transform: uppercase;
                     font-size: 14px;
                     color: $edit-primary-color;
                     padding: 0 10px 14px 15px;
+                }
+
+                .switch label input[type=checkbox]:checked+.lever:after {
+                    background-color: $edit-primary-color;
+                }
+
+                .switch label input[type=checkbox]:checked+.lever {
+                    background-color: rgba(219, 99, 39, 0.6);
                 }
 
                 .label {
@@ -183,9 +209,9 @@ $edit-blue: #1892bf;
                 }
 
                 textarea.materialize-textarea {
-                    border: 1px solid #dbdbdb;
+                    border: none;
+                    border-bottom: 1px solid #dbdbdb;
                     box-sizing: border-box;
-                    min-height: 30px;
                     padding-left: 1rem;
 
                     &:focus:not([readonly]) {
