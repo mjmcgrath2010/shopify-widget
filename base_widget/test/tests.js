@@ -57,11 +57,11 @@ describe('"hapyak" global object', function () {
     });
 
     describe('Widget', function () {
-        var isIframed = widgetUtils.isIframed();;
+        var isIframed = hyWidget.utils.isIframed();;
 
-        describe('widgetUtils object', function () {
+        describe('hyWidget.utils object', function () {
             it('exists', function () {
-                chai.expect(widgetUtils).to.exist;
+                chai.expect(hyWidget.utils).to.exist;
             });
             
             describe('dotget', function () {
@@ -73,7 +73,7 @@ describe('"hapyak" global object', function () {
                                 }
                             }
                         },
-                        dotgetResult = widgetUtils.dotget(nestedObject, 'foo.food.foodie');
+                        dotgetResult = hyWidget.utils.dotget(nestedObject, 'foo.food.foodie');
 
                     chai.expect(dotgetResult).to.equal('tuna');
                     chai.expect(dotgetResult).not.to.equal('groundhog');
@@ -114,7 +114,7 @@ describe('"hapyak" global object', function () {
                                 return;
                             }
 
-                            widgetUtils.setBaseProp(prop, size + '%');
+                            hyWidget.utils.setBaseProp(prop, size + '%');
 
                             setTimeout(function () {
                                 var props = hapyak.widget.getProperties();
@@ -156,7 +156,7 @@ describe('"hapyak" global object', function () {
                             var newClass = randString(),
                                 newPrecond = randString();
 
-                            widgetUtils.setBaseProps({
+                            hyWidget.utils.setBaseProps({
                                 'customClasses': newClass,
                                 'precondition': newPrecond,
                             });

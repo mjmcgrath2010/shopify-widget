@@ -1,4 +1,4 @@
-/*globals hapyak, $, widgetUtils, hyWidget, player, Materialize */
+/*globals hapyak, $, hyWidget, player, Materialize */
 'use strict';
 
 (function () {
@@ -15,7 +15,7 @@
         initMaterialize();
         saveBtn && saveBtn.addEventListener('click', saveSettings, false);
         cancelBtn && cancelBtn.addEventListener('click', function () {
-            widgetUtils.reload('view');
+            hyWidget.utils.reload('view');
         }, false);
     },
     ready = function () {
@@ -41,9 +41,9 @@
         }
 
         player && player.pause();
-        widgetUtils.tempFrameSize('100%', '50%');
-        widgetUtils.display('#widget-body', true);
-        widgetUtils.display('#edit-container', true);
+        hyWidget.utils.tempFrameSize('100%', '50%');
+        hyWidget.utils.display('#widget-body', true);
+        hyWidget.utils.display('#edit-container', true);
     },
     initMaterialize = function () {
         var init = function () {
@@ -73,13 +73,13 @@
             data-property-type : `text`, `display`, `background`, `color`, `etc`
         */
         var querySelect = '#edit-container input.trgtProp, #edit-container textarea.trgtProp',
-            config = widgetUtils.getAllValues(querySelect.replace(/trgtProp/g, 'config')),
-            baseProps = widgetUtils.getAllValues(querySelect.replace(/trgtProp/g, 'base-prop'));
+            config = hyWidget.utils.getAllValues(querySelect.replace(/trgtProp/g, 'config')),
+            baseProps = hyWidget.utils.getAllValues(querySelect.replace(/trgtProp/g, 'base-prop'));
 
-        baseProps && widgetUtils.setBaseProps(baseProps);
-        config && widgetUtils.setConfig(config);
-        widgetUtils.reload('view');
+        baseProps && hyWidget.utils.setBaseProps(baseProps);
+        config && hyWidget.utils.setConfig(config);
+        hyWidget.utils.reload('view');
     };
 
-    widgetUtils.onWidgetLoad(init);
+    hyWidget.utils.onWidgetLoad(init);
 }());
