@@ -1,3 +1,6 @@
+/*globals hapyak, hyWidget */
+'use strict';
+
 (function () {
     var didSetup = false,
         inEditor = false,
@@ -21,7 +24,7 @@
 
             if (toggleBtn) {
                 toggleBtn.style.display = isEditMode && hyWidget.mode === 'view' ? 'block' : 'none';
-                toggleBtn.addEventListener('click', widgetUtils.reload, false);
+                toggleBtn.addEventListener('click', hyWidget.utils.reload, false);
             }
         },
         setup = function () {
@@ -35,5 +38,5 @@
             didSetup = true;
         };
 
-    widgetUtils.onWidgetLoad(init);
+    hyWidget.utils.onWidgetLoad(init);
 }());

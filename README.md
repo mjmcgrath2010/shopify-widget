@@ -25,3 +25,22 @@ This widget will replay a segment of the video until a certain variable is set. 
 This widget will play a supplemental video, embedded on top of a main video. The supplemental video will appear as a thumbnail which can be postioned anywhere on screen. When it is played it expands to be 75% of the main video and centers itself. When the supplemental video is played, the main video will pause and vice-vera.
   * Edit the code to include the HapYak "Native Embed Code" for the supplemental video you wish to play
   * Use the reference hapyak.viewer code to ensure you have the proper callbacks
+
+
+* Requirements *
+ - File Structure
+     - css, js, and html must be in seperate files
+ 
+ - CSS
+     - css is written in Sass
+     - Steps
+         1.  Create or use scss file
+         2.  Install sass if not present `http://sass-lang.com/install`
+         3.  Run `gulp sass-watch`
+  
+ - Tests
+     - Base tests are kept in `/tests.js`
+     - Chai and Mocha can be installed via npm install
+     - Notes:
+         - Tests will run within an iframe and on a main page
+         - Tests run on a main page will exclude tests which require the annotation data to be present
