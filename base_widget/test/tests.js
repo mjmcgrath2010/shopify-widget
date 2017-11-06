@@ -1,6 +1,3 @@
-if (!describe) {
-    return;
-}
 describe('DOM Tests', function () { 
     var widgetBase = document.getElementById('widget-body');
 
@@ -98,7 +95,7 @@ describe('"hapyak" global object', function () {
                                  'startTimeFormat', 'startTimeValue', 'top', 'width', '_duration'];
 
                      props.forEach(function (val) {
-                        chai.expect(widgetProps).to.have.property(val);
+                        chai.expect(hyWidget.props).to.have.property(val);
                     });
                 });
 
@@ -184,7 +181,7 @@ describe('"hapyak" global object', function () {
                 });
 
                 it('does NOT have expected widget properties when not in iframe', function () {
-                    chai.expect(widgetProps).to.equal(undefined);
+                    chai.expect(hyWidget).to.equal(undefined);
                 });
             });
         }

@@ -20,6 +20,67 @@
 
         <div id="widget-body">
             <div id="view-container">
+                <div id="title" class="row">
+                    WELCOME
+                </div>
+                <div id="sub-title" class="row">
+                    PLEASE SIGN IN TO CONTINUE VIEWING
+                </div>
+                <div id="fields" class="row">
+                    <!-- FIELDS GO HERE  -->
+                    <div class="row">
+                        <div class="col s3">
+                        </div>
+                        <div id="first-name" class="col s3 center-align input-field">
+                            <input id="first-name-view-input-field" type="text" class="validate">
+                            <label class="active" for="first-name-view-input-field">First Name</label>
+                        </div>
+                        <div id="last-name" class="col s3 center-align input-field">
+                            <input id="last-name-view-input-field" type="text" class="validate">
+                            <label class="active" for="last-name-view-input-field">Last Name</label>
+                        </div>
+                        <div class="col s3">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s3">
+                        </div>
+                        <div id="email-address" class="col s6 center-align input-field">
+                            <input id="email-address-view-input-field" type="email" class="validate">
+                            <label class="active" for="email-address-view-input-field">Email</label>
+                        </div>
+                        <div class="col s3">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s3">
+                        </div>
+                        <div id="option-one" class="col s6 center-align input-field">
+                            <input id="option-one-view-input-field" type="text">
+                            <label id="option-one-text" class="active" for="option-one-view-input-field">Optional</label>
+                        </div>
+                        <div class="col s3">
+                        </div>
+                    </div>
+                </div>
+                <div id="footer" class="row">
+                    <div class="col s3">
+                    </div>
+                    <div class="col s3 center-align input-field">
+                        <button id="submit-btn" class="btn-large waves-effect waves-light" type="submit" name="action">
+                            Submit
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                    <div class="col s3 center-align input-field">
+                        <button id="skip" class="btn-large waves-effect waves-light" type="submit" name="action">
+                            Skip
+                            <i class="material-icons right">navigate_next</i>
+                        </button>
+                    </div>
+                    <div class="col s3">
+                    </div>
+                </div>
             </div>
             <div id="edit-container">
                 <div class="row header">
@@ -28,7 +89,7 @@
                 <div class="row body">
                     <div class="section">
                         <div class="title row">
-                            Input Example
+                            Default Text
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
@@ -41,10 +102,21 @@
                               <label for="title-value">Title</label>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                              <textarea id="sub-title-value"
+                                  data-editId=""
+                                  data-editId="sub-title-value" 
+                                  data-input-type="text"
+                                  data-property-type="text"
+                                  data-viewId="sub-title" class="materialize-textarea config">PLEASE SIGN IN TO CONTINUE VIEWING</textarea>
+                              <label for="sub-title-value">Sub-Title</label>
+                            </div>
+                        </div>
                     </div>
                     <div class="section">
                         <div class="title row">
-                            Toggle Example
+                            Fields
                         </div>
                         <div class="row margin-bottom">
                             <div class="col s6">
@@ -59,6 +131,44 @@
                                         data-input-type="boolean"
                                         data-property-type="display"
                                         data-viewId="first-name" class="config" checked type="checkbox">
+                                    <span class="lever"></span>
+                                        Show
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom">
+                            <div class="col s6">
+                                Last Name
+                            </div>
+                            <div class="col s6">
+                                <div class="switch">
+                                    <label>
+                                        Hide
+                                    <input id="last-name-value"
+                                        data-editId="last-name-value" 
+                                        data-input-type="boolean"
+                                        data-property-type="display"
+                                        data-viewId="last-name" class="config" checked type="checkbox">
+                                    <span class="lever"></span>
+                                        Show
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom">
+                            <div class="col s6">
+                                Email
+                            </div>
+                            <div class="col s6">
+                                <div class="switch">
+                                    <label>
+                                        Hide
+                                    <input id="email-address-value"
+                                        data-editId="email-address-value" 
+                                        data-input-type="boolean"
+                                        data-property-type="display"
+                                        data-viewId="email-address" class="config" checked type="checkbox">
                                     <span class="lever"></span>
                                         Show
                                     </label>
@@ -92,7 +202,7 @@
                     </div>
                     <div class="section">
                         <div class="title row">
-                            Color Example
+                            Default Colors
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
@@ -104,10 +214,40 @@
                               <label for="background-color-value">Widget Background Color</label>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="text-color-value"
+                                    data-editId="text-color-value" 
+                                    data-input-type="text"
+                                    data-property-type="color"
+                                    data-viewId="view-container" class="materialize-textarea config">#000</textarea>
+                              <label for="text-color-value">Widget Text Color</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="button-backgroundcolor-value"
+                                    data-editId="button-backgroundcolor-value" 
+                                    data-input-type="text"
+                                    data-property-type="background"
+                                    data-viewClass="btn-large" class="materialize-textarea config">#1892bf</textarea>
+                              <label for="button-backgroundcolor-value">Button Background Color</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="button-text-color-value"
+                                    data-editId="button-text-color-value" 
+                                    data-input-type="text"
+                                    data-property-type="color"
+                                    data-viewClass="btn-large" class="materialize-textarea config">#FFF</textarea>
+                              <label for="button-text-color-value">Button Text Color</label>
+                            </div>
+                        </div>
                     </div>
                     <div class="section">
                         <div class="title row">
-                            Option Example
+                            Options
                         </div>
                         <div class="row margin-bottom">
                             <div class="col s6">

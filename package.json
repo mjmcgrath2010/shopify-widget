@@ -2,9 +2,9 @@
   "name": "project",
   "version": "0.0.1",
   "devDependencies": {
-    "chai": "*",
+    "chai": "^4.1.2",
     "gulp-shell": "^0.6.3",
-    "mocha": "*"
+    "mocha": "^4.0.1"
   },
   "dependencies": {
     "gulp": "^3.9.1",
