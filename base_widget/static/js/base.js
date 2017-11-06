@@ -82,7 +82,7 @@
                     }
                 }
 
-                return null;
+                return '';
             },
             remove: function (key) {
                 this.set(key, '', -1);
@@ -307,10 +307,7 @@
         hyWidget.props = hapyak.widget.getProperties();
         hyWidget.config = data && data.customConfig;
 
-        if (typeof(window) !== 'undefined') {
-            window.HapyakCookie = widgetUtils.cookie;
-        }
-
+        window.HapyakCookie = widgetUtils.cookie;
         hapyak.widget.tracking.disableClickTracking();
     };
 
