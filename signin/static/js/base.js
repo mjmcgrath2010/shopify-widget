@@ -129,7 +129,7 @@
                     inputs = {};
 
                 inputValues && inputValues.forEach(function (el) {
-                    // Date.now() in case id is missing
+                    // Date.now() incase id is missing
                     var id = el.id ? el.id.replace('-value', '') : Date.now();
 
                     inputs[id] = {

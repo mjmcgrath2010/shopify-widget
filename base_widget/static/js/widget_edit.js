@@ -1,4 +1,4 @@
-/*globals hapyak, $, hyWidget, player, Materialize */
+/*globals hapyak, $, hyWidget, Materialize */
 'use strict';
 
 (function () {
@@ -40,7 +40,7 @@
             }
         }
 
-        player && player.pause();
+        hapyak.widget.player.pause();
         hyWidget.utils.tempFrameSize('100%', '50%');
         hyWidget.utils.display('#widget-body', true);
         hyWidget.utils.display('#edit-container', true);

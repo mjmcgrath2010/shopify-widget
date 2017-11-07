@@ -1,8 +1,7 @@
-/*globals hapyak, $, hyWidget, player */
+/*globals hapyak, $, hyWidget */
 'use strict';
 
 (function () {
-    window.player = {};
     window.hyWidget = {
         didLoad: false,
         props: {},
@@ -130,7 +129,7 @@
                     inputs = {};
 
                 inputValues && inputValues.forEach(function (el) {
-                    // Date.now() in case id is missing
+                    // Date.now() incase id is missing
                     var id = el.id ? el.id.replace('-value', '') : Date.now();
 
                     inputs[id] = {
@@ -293,7 +292,7 @@
                     var isHyEditMode = hapyak.widget.player.isEditMode;
 
                     hyWidget.mode = isHyEditMode && hyWidget.utils.getParameterByName('mode') === 'edit' ? 'edit' : 'view';
-                    player = hapyak.widget.player;
+
                     cb && cb(hapyak.widget.player.isEditMode, data);
                 }, false);
 
