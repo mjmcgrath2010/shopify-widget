@@ -88,7 +88,7 @@
                 }
             },
             isIframed: function () {
-                // try/catch to handel security exception
+                // try/catch to handle security exception
                 try {
                     return window.self !== window.top;
                 } catch (e) {

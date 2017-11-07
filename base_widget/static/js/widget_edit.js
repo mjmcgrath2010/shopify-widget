@@ -14,7 +14,7 @@
 
         initMaterialize();
         saveBtn && saveBtn.addEventListener('click', saveSettings, false);
-        cancelBtn && cancelBtn.addEventListener('click', function () {
+        cancelBtn && cancelBtn.addEventListener('click', function cancelAndReload () {
             hyWidget.utils.reload('view');
         }, false);
     },

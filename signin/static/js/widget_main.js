@@ -1,3 +1,6 @@
+/*globals hapyak, hyWidget, Materialize */
+'use strict';
+
 (function () {
     var auth = null,
         didSetup = false,
@@ -5,6 +8,8 @@
         widgetData = null,
         init = function (isEditMode, data) {
             var user = existingUserInfo();
+
+            var authInfo;
 
             widgetData = data;
             inEditor = hyWidget.mode === 'view' &&  hapyak.widget.player.isEditMode;
@@ -18,9 +23,11 @@
             }
 
             if (isAuthed()) {
+                authInfo = hapyak.context.auth();
+
                 trackAction('auto', {
-                    'userId': userId,
-                    'username': username
+                    'userId': authInfo.userId,
+                    'username': authInfo.username
                 });
                 signinComplete();
                 return;
@@ -69,16 +76,16 @@
         },
         validate = function (values) {
             var available = ['first-name', 'last-name', 'option-one', 'email-address'],
-                config = hyWidget.config;
+                config = hyWidget.config,
                 isValid = true;
 
             config && available.forEach(function (field) {
-                var field = config[field],
-                    viewId = field && field.viewid + '-view-input-field',
+                var currentField = config[field],
+                    viewId = currentField && currentField.viewid + '-view-input-field',
                     trgtEl = viewId && document.getElementById(viewId);
 
-                // If the field is not present, then count as true
-                if (!field.value) {
+                // If the currentField is not present, then count as true
+                if (!currentField.value) {
                     return;
                 }
 
@@ -156,7 +163,7 @@
             first = formValues['first-name'  + viewVal].value;
             last = formValues['last-name'  + viewVal].value;
             userName = first + ' ' + last;
-            optionVal = formValues['option-one'  + viewVal].value
+            optionVal = formValues['option-one'  + viewVal].value;
 
             trackAction('manual', {
                 'userId': userId,
@@ -186,7 +193,7 @@
                     hyWidget.utils.reload();
                 });
             }
-        }
+        },
         setup = function () {
             var submitBtn = document.getElementById('submit-btn'),
                 skipBtn = document.getElementById('skip'),
@@ -219,7 +226,7 @@
                 }
 
                 // Explicitly check value is false
-                if (config['gated'].value === false) {
+                if (config.gated.value === false) {
                     hapyak.widget.releaseGate();
                 }
             }

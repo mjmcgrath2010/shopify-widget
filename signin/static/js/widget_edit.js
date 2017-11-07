@@ -1,3 +1,6 @@
+/*globals hapyak, $, hyWidget, Materialize */
+'use strict';
+
 (function () {
     var init = function (isEditMode, data) {
             var saveBtn = document.getElementById('save-widget-config'),
@@ -11,7 +14,6 @@
 
             initMaterialize();
             saveBtn && saveBtn.addEventListener('click', function () {
-
                 saveSettings();
             }, false);
             cancelBtn && cancelBtn.addEventListener('click', function () {
@@ -19,7 +21,9 @@
             }, false);
         },
         ready = function () {
-            var trgtEl;
+            var trgtEl,
+                key;
+
             var config = hyWidget.config;
 
             if (config) {
@@ -27,7 +31,7 @@
                     trgtEl = document.getElementById(key + '-value');
 
                     if (config[key].propertyType === 'display') {
-                        trgtEl.checked = config[key].value
+                        trgtEl.checked = config[key].value;
                     } else {
                         trgtEl.innerText = config[key].value;
                     }
@@ -54,7 +58,7 @@
                 init();
             });
         },
-        saveSettings = function (baseProps, config) {
+        saveSettings = function () {
             /*
                 Example input el:
                 <input id="skip-value"
