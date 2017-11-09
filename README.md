@@ -32,7 +32,9 @@ This widget will play a supplemental video, embedded on top of a main video. The
      - css, js, and html must be in seperate files
  
  - CSS
-     - css is written in Sass
+     - Sass
+     - Install:
+          - 
      - Steps
          1.  Create or use scss file
          2.  Install sass if not present `http://sass-lang.com/install`
