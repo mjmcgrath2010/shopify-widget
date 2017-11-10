@@ -26,16 +26,18 @@
 
         if (config) {
             for (key in config) {
-                trgtEl = document.getElementById(key + '-value');
+                if (config.hasOwnProperty(key)) {
+                    trgtEl = document.getElementById(key + '-value');
 
-                if (!trgtEl) {
-                    return;
-                }
+                    if (!trgtEl) {
+                        return;
+                    }
 
-                if (config[key].propertyType === 'display') {
-                    trgtEl.checked = config[key].value;
-                } else {
-                    trgtEl.innerText = config[key].value;
+                    if (config[key].propertyType === 'display') {
+                        trgtEl.checked = config[key].value;
+                    } else {
+                        trgtEl.innerText = config[key].value;
+                    }
                 }
             }
         }
@@ -64,10 +66,10 @@
         /*
             Example input el:
             <textarea id="title-value"
-                data-editId="title-value"
+                data-edit-id="title-value"
                 data-input-type="text"
                 data-property-type="text"
-                data-viewId="title"
+                data-view-id="title"
                 class="materialize-textarea config">Default Text</textarea>
 
             data-property-type : `text`, `display`, `background`, `color`, `etc`

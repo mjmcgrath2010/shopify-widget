@@ -1,3 +1,6 @@
+/*globals hapyak, hyWidget, describe, it, expect, before, chai, assert */
+'use strict';
+
 describe('DOM Tests', function () { 
     var widgetBase = document.getElementById('widget-body');
 
@@ -13,7 +16,7 @@ describe('DOM Tests', function () {
 describe('"hapyak" global object', function () {
     var loaded = false;
 
-    this.timeout(20000)
+    this.timeout(20000);
 
     // todo: listen for the load event and remove setTimeout
     before(function(done) {
@@ -33,7 +36,7 @@ describe('"hapyak" global object', function () {
 
     describe('hapyak.widget', function () {
         it('exists', function () {
-            chai.expect(hapyak).to.have.property('widget')
+            chai.expect(hapyak).to.have.property('widget');
         });
 
         it('has expected functions', function () {
@@ -57,7 +60,7 @@ describe('"hapyak" global object', function () {
     });
 
     describe('Widget', function () {
-        var isIframed = hyWidget.utils.isIframed();;
+        var isIframed = hyWidget.utils.isIframed();
 
         describe('hyWidget.utils object', function () {
             it('exists', function () {
@@ -77,13 +80,13 @@ describe('"hapyak" global object', function () {
 
                     chai.expect(dotgetResult).to.equal('tuna');
                     chai.expect(dotgetResult).not.to.equal('groundhog');
-                })
+                });
             });
 
             describe('isIframed', function () {
                 it ('should return boolean', function () {
                     assert.isBoolean(isIframed);
-                })
+                });
             });
         });
 
@@ -158,21 +161,21 @@ describe('"hapyak" global object', function () {
 
                             hyWidget.utils.setBaseProps({
                                 'customClasses': newClass,
-                                'precondition': newPrecond,
+                                'precondition': newPrecond
                             });
 
                             it('has setable customClasses, durationValue, noscale', function (done) {
                                 setTimeout(function () {
                                     var props = hapyak.widget.getProperties();
 
-                                    chai.expect(props['customClasses']).to.equal(newClass);
-                                    chai.expect(props['precondition']).to.equal(newPrecond);
+                                    chai.expect(props.customClasses).to.equal(newClass);
+                                    chai.expect(props.precondition).to.equal(newPrecond);
                                     done();
                                 }, 3000);
                             });
                         });
                     });
-                })
+                });
             });
         } else {
             describe('widget properties', function () {
@@ -193,6 +196,6 @@ describe('"hapyak" global object', function () {
             it('is not active if iframed', function () {
                 chai.expect(isActive).to.equal(isIframed ? false : true);
             });
-        })
+        });
     });
 });

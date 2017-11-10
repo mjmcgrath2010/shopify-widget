@@ -1,11 +1,9 @@
 var gulp = require('gulp'),
-    concat = require('gulp-concat'),
-    uglify = require('gulp-uglify'),
-    shell = require('gulp-shell'),
-    destLoc = './static/',
-    scssLoc = './scss/**/*.scss';
+    destLoc = './static/css/',
+    scssLoc = './scss/**/*.scss',
+    sass = require('gulp-sass');
 
-// CSS
+// Run sass compiler once
 gulp.task('sass', function () {
     var sass = require('gulp-sass');
 
@@ -14,10 +12,10 @@ gulp.task('sass', function () {
         .pipe(gulp.dest(destLoc));
 });
 
-// CSS (watch)
-gulp.task('sass-watch', shell.task([
-    'sass --watch scss/widget.scss:static/css/widget.css'
-]));
+// Watch sass for changes
+gulp.task('sass:watch', function () {
+  gulp.watch(scssLoc, ['sass']);
+});
 
 // Build distribution
 gulp.task('dist', ['sass']);

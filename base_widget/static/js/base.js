@@ -8,7 +8,7 @@
         config: {},
         mode: '',
         utils: {
-            dotget: function (obj, desc, d) {
+            dotget: function dotgetProp (obj, desc, d) {
                 var value,
                     arr;
 
@@ -23,7 +23,7 @@
 
                 return value !== undefined ? value : d;
             },
-            getParameterByName: function (name, url) {
+            getParameterByName: function getParam (name, url) {
                 var regex,
                     results;
 
@@ -35,18 +35,14 @@
                 regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
                 results = regex.exec(url);
 
-                if (!results) {
-                    return '';
-                }
-
-                if (!results[2]) {
+                if (!results || !results[2]) {
                     return '';
                 }
 
                 return decodeURIComponent(results[2].replace(/\+/g, ' '));
             },
             cookie: {
-                set: function (key, value, days) {
+                set: function setCookie (key, value, days) {
                     var expires,
                         date;
 
@@ -61,7 +57,7 @@
 
                     document.cookie = key + '=' + value + expires + '; path=/';
                 },
-                get: function (key) {
+                get: function getCookie (key) {
                     var cookie,
                         i;
 
@@ -82,11 +78,11 @@
 
                     return '';
                 },
-                remove: function (key) {
+                remove: function removeCookie (key) {
                     this.set(key, '', -1);
                 }
             },
-            isIframed: function () {
+            isIframed: function isInIframe () {
                 // try/catch to handle security exception
                 try {
                     return window.self !== window.top;
@@ -94,41 +90,43 @@
                     return true;
                 }
             },
-            applyConfig: function (config) {
+            applyConfig: function applyConfiguration (config) {
                 var prop,
                     trgt,
                     trgtEl,
                     trgtEls;
 
                 for (prop in config) {
-                    trgt = config[prop];
-                    trgtEl = document.getElementById(trgt.viewid),
-                    trgtEls = document.querySelectorAll('#view-container .' + trgt.viewclass);
+                    if (config.hasOwnProperty(prop)) {
+                        trgt = config[prop];
+                        trgtEl = document.getElementById(trgt.viewid),
+                        trgtEls = document.querySelectorAll('#view-container .' + trgt.viewclass);
 
-                    if (trgt.propertyType === 'background' || trgt.propertyType === 'color') {
-                        if (trgtEl) {
-                            trgtEl.style[trgt.propertyType] = trgt.value;
-                        } else if (trgtEls) {
-                            trgtEls.forEach(function (el) {
-                                el.style[trgt.propertyType] = trgt.value;
-                            });
+                        if (trgt.propertyType === 'background' || trgt.propertyType === 'color') {
+                            if (trgtEl) {
+                                trgtEl.style[trgt.propertyType] = trgt.value;
+                            } else if (trgtEls) {
+                                trgtEls.forEach(function (el) {
+                                    el.style[trgt.propertyType] = trgt.value;
+                                });
+                            }
                         }
-                    }
 
-                    if (trgtEl && trgt.propertyType === 'display') {
-                        trgtEl.style.display = trgt.value ? 'block' : 'none';
-                    }
+                        if (trgtEl && trgt.propertyType === 'display') {
+                            trgtEl.style.display = trgt.value ? 'block' : 'none';
+                        }
 
-                    if (trgt.propertyType === 'text') {
-                        trgtEl.innerText = trgt.value;
+                        if (trgt.propertyType === 'text') {
+                            trgtEl.innerText = trgt.value;
+                        }
                     }
                 }
             },
-            getAllValues: function (querySelector) {
-                var inputValues = document.querySelectorAll(querySelector) || [],
+            getAllValues: function getAvailableValues (querySelector) {
+                var inputValues = document.querySelectorAll(querySelector),
                     inputs = {};
 
-                inputValues && inputValues.forEach(function (el) {
+                inputValues.forEach(function (el) {
                     // Date.now() incase id is missing
                     var id = el.id ? el.id.replace('-value', '') : Date.now();
 
@@ -151,36 +149,35 @@
                 return inputs;
             },
             track: {
-                event: function (provider, type, props) {
+                event: function trackEvt (provider, type, props) {
                     if (provider === 'hy') {
                         hapyak.widget.tracking.action(type, props);
                     }
                 },
-                click: function (evt) {
+                click: function trackClick (evt) {
                     hapyak.widget.tracking.click(evt);
                 }
             },
-            env: function (action, prop, val) {
+            env: function hyEnv (action, prop, val) {
                 if (action === 'get') {
                     return hapyak.widget.env.get(prop);
                 }
 
-                // hapyak.widget.env.set this needs to be checked
                 if (action === 'set') {
                     hapyak.widget.env.set(prop, val, false, 'track');
                 }
             },
-            releaseGate: function () {
+            releaseGate: function releaseIframeGate () {
                 hapyak.widget.releaseGate();
             },
-            setConfig: function (props) {
+            setConfig: function setConfiguration (props) {
                 /*
                     Freeform json blob
                     * This will be updated to be settable within setBaseProp *
                 */
                 hapyak.context.annotationConfig = props;
             },
-            setBaseProp: function (prop, val) {
+            setBaseProp: function setBaseProperty (prop, val) {
                 var isNumeric = function (n) {
                         return !isNaN(parseFloat(n)) && isFinite(n);
                     };
@@ -191,7 +188,7 @@
 
                 hapyak.widget.set(prop, val);
             },
-            setBaseProps: function (props) {
+            setBaseProps: function setBaseProperties (props) {
                 var key;
 
                 var data = {
@@ -212,21 +209,32 @@
                 };
 
                 for (key in data) {
-                    if (!data[key]) {
+                    if (data.hasOwnProperty(key) && data[key] === undefined) {
                         delete data[key];
                     }
                 }
 
                 hapyak.widget.setProperties(data);
             },
-            hideEditBtns: function (props) {
+            hideEditBtns: function hideIframeQuickeditBtns (props) {
                 /*
                     {
                         'delete': true
                     }
                 */
-                var availableProps = ['editor', 'preview', 'done', 'delete','more','nudge', 'gate',
-                                      'duration', 'startTime', 'pause', 'displayRule', 'addClass', 'scale'];
+                var availableProps = ['editor',
+                                      'preview',
+                                      'done',
+                                      'delete',
+                                      'more',
+                                      'nudge',
+                                      'gate',
+                                      'duration',
+                                      'startTime',
+                                      'pause',
+                                      'displayRule',
+                                      'addClass',
+                                      'scale'];
                 
                 if (!props) {
                     return;
@@ -244,7 +252,7 @@
                     }
                 });
             },
-            tempFrameSize: function (height, width) {
+            tempFrameSize: function setIframeSize (height, width) {
                 if (height) {
                     hapyak.context.height = height;
                 }
@@ -260,15 +268,10 @@
 
                 hapyak.widget.player.removeClass(['hapyak-annotation-full-frame']);
             },
-            display: function (elem, show) {
-                if (show) {
-                    $(elem).addClass('active');
-                    return;
-                }
-                
-                $(elem).removeClass('active');
+            display: function setElDisplay (elem, show) {
+                $(elem).toggleClass('active', show);
             },
-            reload: function (override) {
+            reload: function reloadIframe (override) {
                 var url = window.location.origin + window.location.pathname + '?bust=' + Date.now(),
                     mode = hyWidget.utils.getParameterByName('mode');
 
@@ -278,7 +281,7 @@
                 
                 window.location.href = url;
             },
-            onWidgetLoad: function (cb) {
+            onWidgetLoad: function setupWidgetBase (cb) {
                 var baseAlertText = document.getElementById('base-alert-text');
 
                 if (!hyWidget.utils.isIframed()) {
@@ -303,7 +306,7 @@
         }
     };
 
-    var init = function (isEditMode, data) {
+    var init = function initWidget (isEditMode, data) {
         hyWidget.props = hapyak.widget.getProperties();
         hyWidget.config = data && data.customConfig;
 

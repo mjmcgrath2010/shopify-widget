@@ -1,8 +1,9 @@
 {
-  "name": "project",
+  "name": "HapYak Certified Widgets",
   "version": "0.0.1",
   "devDependencies": {
     "chai": "^4.1.2",
+    "gulp-sass": "^3.1.0",
     "gulp-shell": "^0.6.3",
     "mocha": "^4.0.1"
   },
