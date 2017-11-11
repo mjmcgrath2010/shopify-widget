@@ -58,11 +58,11 @@
                     document.cookie = key + '=' + value + expires + '; path=/';
                 },
                 get: function getCookie (key) {
-                    var cookie,
-                        i;
-
                     var identifier = key + '=',
                         cookies = document.cookie.split(';');
+
+                    var cookie,
+                        i;
 
                     for (i = 0; i < cookies.length; i++) {
                         cookie = cookies[i];
@@ -189,8 +189,6 @@
                 hapyak.widget.set(prop, val);
             },
             setBaseProps: function setBaseProperties (props) {
-                var key;
-
                 var data = {
                     'durationFormat': props.durationFormat,
                     'durationValue': props.durationValue,
@@ -207,6 +205,8 @@
                     'customClasses': props.customClasses,
                     'gate': props.gate
                 };
+
+                var key;
 
                 for (key in data) {
                     if (data.hasOwnProperty(key) && data[key] === undefined) {

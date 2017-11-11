@@ -2,7 +2,7 @@
 'use strict';
 
 (function () {
-    var init = function (isEditMode, data) {
+    var init = function editInit (isEditMode, data) {
         var saveBtn = document.getElementById('save-widget-config'),
             cancelBtn = document.getElementById('cancel-widget-config');
 
@@ -18,11 +18,11 @@
             hyWidget.utils.reload('view');
         }, false);
     },
-    ready = function () {
+    ready = function editReady () {
+        var config = hyWidget.config;
+
         var trgtEl,
             key;
-
-        var config = hyWidget.config;
 
         if (config) {
             for (key in config) {
@@ -47,7 +47,7 @@
         hyWidget.utils.display('#widget-body', true);
         hyWidget.utils.display('#edit-container', true);
     },
-    initMaterialize = function () {
+    initMaterialize = function editInitMaterialize () {
         var init = function () {
             Materialize.updateTextFields && Materialize.updateTextFields();
             ready();
@@ -58,11 +58,11 @@
             return;
         }
         
-        $(document).ready(function() {
+        $(document).ready(function () {
             init();
         });
     },
-    saveSettings = function () {
+    saveSettings = function saveWidgetSettings () {
         /*
             Example input el:
             <textarea id="title-value"

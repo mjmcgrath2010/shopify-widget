@@ -5,7 +5,7 @@
     var didSetup = false,
         inEditor = false,
         widgetData = null,
-        init = function (isEditMode, data) {
+        init = function mainSetup (isEditMode, data) {
             widgetData = data;
             inEditor = hyWidget.mode === 'view' &&  hapyak.widget.player.isEditMode;
 
@@ -17,7 +17,7 @@
                 setup();
             }
         },
-        setupToggle = function () {
+        setupToggle = function mainSetupToggle () {
             // Toggle for editing/viewing in hy edit mode
             var toggleBtn = document.getElementById('change-mode'),
                 isEditMode = hapyak.widget.player.isEditMode;
@@ -27,7 +27,7 @@
                 toggleBtn.addEventListener('click', hyWidget.utils.reload, false);
             }
         },
-        setup = function () {
+        setup = function mainSetup () {
             // Props are available in `widgetData`
             setupToggle();
 
