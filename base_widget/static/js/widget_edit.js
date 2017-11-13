@@ -37,6 +37,7 @@
                         trgtEl.checked = config[key].value;
                     } else {
                         trgtEl.innerText = config[key].value;
+                        trgtEl.value = config[key].value;
                     }
                 }
             }
