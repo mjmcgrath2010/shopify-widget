@@ -35,6 +35,9 @@
 
                     if (config[key].propertyType === 'display') {
                         trgtEl.checked = config[key].value;
+                    } else if (['color', 'background'].indexOf(config[key].propertyType) > -1) {
+                        trgtEl.style.background = '#' + config[key].value;
+                        trgtEl.value =  config[key].value;
                     } else {
                         trgtEl.innerText = config[key].value;
                         trgtEl.value = config[key].value;
