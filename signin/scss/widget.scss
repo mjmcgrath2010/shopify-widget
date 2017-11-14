@@ -63,8 +63,12 @@
         #footer {
             margin-top: 30px;
             
-            #submit-btn, button.btn-large, button.btn {
+            #submit-btn {
                 background: $edit-blue;
+            }
+
+            .btn-flat:hover {
+                background-color: rgba(0, 0, 0, .1);
             }
         }
     }
