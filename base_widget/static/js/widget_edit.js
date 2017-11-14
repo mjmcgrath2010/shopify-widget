@@ -47,7 +47,7 @@
         }
 
         hapyak.widget.player.pause();
-        hyWidget.utils.tempFrameSize('100%', '50%');
+        hyWidget.utils.tempFrameSize('100%', '40%');
         hyWidget.utils.display('#widget-body', true);
         hyWidget.utils.display('#edit-container', true);
     },

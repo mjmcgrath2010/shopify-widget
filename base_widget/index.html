@@ -22,14 +22,14 @@
             </div>
             <div id="edit-container">
                 <div class="row header">
-                    Configuration
+                    <h1>Configuration</h1>
                 </div>
                 <div class="row body">
                     <div class="section">
                         <div class="title row">
-                            Input Example
+                            <h2>Input Example</h2>
                         </div>
-                        <div class="row">
+                        <div class="row settings-fields">
                             <div class="input-field col s12">
                                 <textarea id="title-value"
                                     data-edit-id="title-value"
@@ -43,13 +43,13 @@
                     </div>
                     <div class="section">
                         <div class="title row">
-                            Toggle Example
+                            <h2>Toggle Example</h2>
                         </div>
-                        <div class="row margin-bottom">
-                            <div class="col s6">
+                        <div class="row settings-fields margin-bottom">
+                            <div class="col s6 field-label">
                                 First Name
                             </div>
-                            <div class="col s6">
+                            <div class="col s6 right-align">
                                 <div class="switch">
                                     <label>
                                         Hide
@@ -64,16 +64,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row margin-bottom">
-                            <div id="option" class="col s6">
+                        <div class="row settings-fields">
+                            <div id="option" class="col s6 field-label">
                                 <textarea id="option-one-text-value"
                                     data-edit-id="option-one-text-value"
                                     data-input-type="text"
                                     data-property-type="text"
                                     data-view-id="option-one-text"
-                                    class="materialize-textarea config">Option</textarea>
+                                    placeholder="Option" 
+                                    class="materialize-textarea config"></textarea>
                             </div>
-                            <div class="col s6">
+                            <div class="col s6 right-align">
                                 <div class="switch">
                                     <label>
                                         Hide
@@ -91,13 +92,13 @@
                     </div>
                     <div class="section">
                         <div class="title row">
-                            Color Example JsColor
+                            <h2>Color Example JsColor</h2>
                         </div>
-                        <div class="row">
-                            <div class="input-field col s6">
+                        <div class="row settings-fields">
+                            <div class="input-field col s6 field-label">
                               Widget Background Color
                             </div>
-                            <div class="input-field col s6">
+                            <div class="input-field col s6 right-align">
                                 <input id="background-color-value"
                                     data-edit-id="background-color-value" 
                                     data-input-type="text"
@@ -108,13 +109,13 @@
                     </div>
                     <div class="section">
                         <div class="title row">
-                            Option Example
+                            <h2>Option Example</h2>
                         </div>
-                        <div class="row margin-bottom">
-                            <div class="col s6">
+                        <div class="row margin-bottom settings-fields">
+                            <div class="col s6 field-label">
                                 Skip
                             </div>
-                            <div class="col s6">
+                            <div class="col s6 right-align">
                                 <div class="switch">
                                     <label>
                                         Hide
@@ -129,11 +130,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row margin-bottom">
-                            <div class="col s6">
+                        <div class="row margin-bottom settings-fields">
+                            <div class="col s6 field-label">
                                 Gated
                             </div>
-                            <div class="col s6">
+                            <div class="col s6 right-align">
                                 <div class="switch">
                                     <label>
                                         Inactive
@@ -149,21 +150,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="footer">
-                    </div>
                 </div>
                 <div class="row footer">
-                    <div class="col s6">
-                    </div>
-                    <div class="col s3">
-                        <div id="cancel-widget-config" class="waves-effect waves-light btn-flat">
+                    <div class="col s12 right-align">
+                        <a id="cancel-widget-config" class="waves-effect waves-grey btn-flat">
                             CANCEL
-                        </div>
-                    </div>
-                    <div class="col s3">
-                        <div id="save-widget-config" class="waves-effect waves-light btn">
+                        </a>
+                        <a id="save-widget-config" class="waves-effect waves-light btn">
                             SAVE
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
