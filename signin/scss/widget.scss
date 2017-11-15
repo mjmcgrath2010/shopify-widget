@@ -67,6 +67,10 @@
                 background: $edit-blue;
             }
 
+            #skip {
+                float: right;
+            }
+
             .btn-flat:hover {
                 background-color: rgba(0, 0, 0, .1);
             }

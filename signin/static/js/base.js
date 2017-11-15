@@ -105,6 +105,12 @@
                         if (trgt.propertyType === 'background' || trgt.propertyType === 'color') {
                             if (trgtEl) {
                                 trgtEl.style[trgt.propertyType] = '#' + trgt.value;
+
+                                if (trgt.propertyType === 'color' && trgt.type === 'text' && trgt.viewid === 'view-container') {
+                                    document.querySelectorAll('#fields label').forEach(function (el) {
+                                        el.style[trgt.propertyType] = '#' + trgt.value;
+                                    });
+                                }
                             } else if (trgtEls) {
                                 trgtEls.forEach(function (el) {
                                     el.style[trgt.propertyType] = '#' + trgt.value;
