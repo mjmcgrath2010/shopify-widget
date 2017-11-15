@@ -240,7 +240,7 @@
 
             submitBtn && submitBtn.addEventListener('click', submit, false);
             skipBtn && skipBtn.addEventListener('click', function skipForm () {
-                trackAction('skip');
+                trackAction('skip', {});
                 signinComplete();
             }, false);
 
