@@ -3,7 +3,6 @@
 
 (function () {
     window.hyWidget = {
-        didLoad: false,
         props: {},
         config: {},
         mode: '',
@@ -287,22 +286,24 @@
                 
                 window.location.href = url;
             },
+            annotationData: {},
+            cbQueue: [],
+            startLoad: function () {
+                var isHyEditMode = hapyak.widget.player.isEditMode,
+                    that = this;
+
+                hyWidget.mode = isHyEditMode && hyWidget.utils.getParameterByName('mode') === 'edit' ? 'edit' : 'view';
+
+                this.cbQueue.forEach(function (cb) {
+                    cb && cb(hapyak.widget.player.isEditMode, that.annotationData);
+                });
+            },
             onWidgetLoad: function setupWidgetBase (cb) {
                 var baseAlertText = document.getElementById('base-alert-text'),
                     ready = false,
-                    annotationData = {},
-                    startLoad = function () {
-                        if (!ready) {
-                            ready = true;
-                            return;
-                        }
+                    that = this;
 
-                        var isHyEditMode = hapyak.widget.player.isEditMode;
-
-                        hyWidget.mode = isHyEditMode && hyWidget.utils.getParameterByName('mode') === 'edit' ? 'edit' : 'view';
-
-                        cb && cb(hapyak.widget.player.isEditMode, annotationData);
-                    };
+                this.cbQueue.push(cb);
 
                 if (!hyWidget.utils.isIframed()) {
                     hyWidget.utils.display('#widget-body', true);
@@ -311,18 +312,8 @@
                     return;
                 }
 
-                // Evt listener for `iframeshow` so that we have access to .auth() information
-                hapyak.context.addEventListener('iframeshow', function hyDataAvailable (data) {
-                    startLoad();
-                }, false);
-
                 hapyak.context.addEventListener('annotationload', function hyDataAvailable (data) {
-                    annotationData = data;
-                    startLoad();
-                }, false);
-
-                hapyak.context.addEventListener('editModeChange', function hyDataAvailable () {
-                    hyWidget.utils.reload('view');
+                    that.annotationData = data;
                 }, false);
             }
         }
