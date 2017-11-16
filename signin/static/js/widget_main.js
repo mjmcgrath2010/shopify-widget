@@ -3,6 +3,7 @@
 
 (function () {
     var auth = null,
+        ready = false,
         didSetup = false,
         inEditor = false,
         widgetData = null,
@@ -251,5 +252,18 @@
             hyWidget.utils.display('#view-container', true);
         };
 
+    function customLoad() {
+        // Widget is ready after `iframeshow` and `annotationload` fire
+        if (!this.ready) {
+            this.ready = true;
+            return;
+        }
+
+        hyWidget.utils.startLoad();
+    }
+
+    // Evt listener for `iframeshow` so that we have access to .auth() information
+    hapyak.context.addEventListener('iframeshow', customLoad, false);
+    hapyak.context.addEventListener('annotationload', customLoad, false);
     hyWidget.utils.onWidgetLoad(init);
 }());
