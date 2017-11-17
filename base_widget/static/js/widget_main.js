@@ -28,7 +28,6 @@
             }
         },
         setup = function mainSetup () {
-            // Props are available in `widgetData`
             setupToggle();
 
             if (didSetup) {
@@ -36,7 +35,16 @@
             }
 
             didSetup = true;
+        },
+        customLoad = function customLoadWhenReady() {
+            /*
+                Required to init widget load for both editor and viewer.
+                Widgets may require unique events to occur before load, so this logic
+                is executed on a per widget basis.
+            */
+            hyWidget.utils.startLoad();
         };
 
     hyWidget.utils.onWidgetLoad(init);
+    hapyak.context.addEventListener('annotationload', customLoad, false);
 }());
