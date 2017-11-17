@@ -27,7 +27,7 @@
                 authInfo = hapyak.context.auth();
 
                 authUser(authInfo.userId, authInfo.username);
-                trackAction('auto', {
+                trackAction('submit', 'auto', {
                     'userId': authInfo.userId,
                     'username': authInfo.username
                 });
@@ -37,7 +37,7 @@
 
             if (user.userCookie && user.userCookie !== '') {
                 authUser(user.userCookie, user.userNameCookie);
-                trackAction('auto', {
+                trackAction('submit', 'auto', {
                     'userId': user.userCookie,
                     'username': user.userNameCookie
                 });
@@ -110,28 +110,28 @@
             window.HapyakCookie.set('_hapyakTrackingUser', userId);
             window.HapyakCookie.set('_hapyakTrackingUserName', username);
 
-            hyWidget.utils.env('set', '_hapyakTrackingUser', userId);
-            hyWidget.utils.env('set', '_hapyakTrackingUserName', username);
+            hyWidget.utils.env.set('_hapyakTrackingUser', userId);
+            hyWidget.utils.env.set('_hapyakTrackingUserName', username);
 
             hapyak.context.auth({
                 userId: userId,
                 username: username
             });
         },
-        trackAction = function hyTrackAction (type, values) {
+        trackAction = function hyTrackAction (action, mode, values) {
             var dotget = hyWidget.utils.dotget,
                 data = {
                     widget: 'widget_signin',
-                    widgetName: widgetData && widgetData.customWidget || '',
-                    action: type,
+                    widgetName: widgetData && widgetData.customWidget || null,
+                    submitMode: mode,
                     title: dotget(hyWidget, 'config.title.value'),
                     subTitle: dotget(hyWidget, 'config.sub-title.value'),
-                    optionValue: values.optionVal || '',
+                    optionValue: values.optionVal || null,
                     optionValuePlaceholderText: dotget(hyWidget, 'config.option-one-text.value'),
                     optionInputAvailable: dotget(hyWidget, 'config.option-one.value'),
-                    firstNameValue: values.firstName || '',
+                    firstNameValue: values.firstName || null,
                     firstNameOptionInputAvailable: dotget(hyWidget, 'config.first-name.value'),
-                    lastNameValue: values.lastName || '',
+                    lastNameValue: values.lastName || null,
                     lastNameOptionInputAvailable: dotget(hyWidget, 'config.last-name.value'),
                     gated: !!dotget(hyWidget, 'props.gate'),
                     skippable: dotget(hyWidget, 'config.skip.value')
@@ -145,7 +145,7 @@
                 data.username = values.username;
             }
 
-            hyWidget.utils.track.event('hy', 'leadGen', data);
+            hyWidget.utils.track.event('hapyak', action, data);
         },
         submit = function submitData () {
             var formValues = hyWidget.utils.getAllValues('#fields input'),
@@ -172,7 +172,7 @@
             optionVal = getVal('option-one');
             userName = first + ' ' + last;
 
-            trackAction('manual', {
+            trackAction('submit', 'manual', {
                 'userId': userId,
                 'userName': userName,
                 'firstName': first,
@@ -189,7 +189,7 @@
 
             hapyak.widget.releaseGate();
             hyWidget.utils.tempFrameSize('0%', '0%');
-            hyWidget.utils.env('set', 'loginComplete', true);
+            hyWidget.utils.env.set('loginComplete', true);
         },
         setupToggle = function mainSetupToggle () {
             // Toggle for editing/viewing in hy edit mode
@@ -241,7 +241,7 @@
 
             submitBtn && submitBtn.addEventListener('click', submit, false);
             skipBtn && skipBtn.addEventListener('click', function skipForm () {
-                trackAction('skip', {});
+                trackAction('skip', 'manual', {});
                 signinComplete();
             }, false);
 
