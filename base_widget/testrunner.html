@@ -28,9 +28,10 @@
         <script type="text/javascript" src="vendor/materialize/0.100.2.materialize.min.js"></script>
         <script type="text/javascript" src="vendor/jscolor/jscolor.min.js"></script>
 
-        <script type="text/javascript" src="//d2qrdklrsxowl2.cloudfront.net/static/js/widget/v1/base.js"></script>
-        <script type="text/javascript" src="//d2qrdklrsxowl2.cloudfront.net/static/js/widget/v1/widget_edit.js"></script>
-        <script type="text/javascript" src="/base_widget/static/js/widget_main.js"></script>
+
+        <script type="text/javascript" src="//dev.hapyak.com/static/js/widget/v1/base.js"></script>
+        <script type="text/javascript" src="//dev.hapyak.com/static/js/widget/v1/widget_edit.js"></script>
+        <script type="text/javascript" src="static/js/widget_main.js"></script>
 
         <button id="re-rerun">
           Re-Run
@@ -40,6 +41,8 @@
         <script src="/node_modules/mocha/mocha.js"></script>
         <script src="/node_modules/chai/chai.js"></script>
         <script>
+            console.log('here!');
+
             mocha.ui('bdd'); 
             mocha.reporter('html');
             var expect = chai.expect;
