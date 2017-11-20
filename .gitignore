@@ -3,5 +3,3 @@ node_modules/*
 */.sass-cache/*
 */static/css/widget.css.map*
 .DS_Store
-*/static/*.css
-*/static/*/*.css
