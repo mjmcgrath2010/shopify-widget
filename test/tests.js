@@ -1,4 +1,4 @@
-/*globals hapyak, hyWidget, describe, it, expect, before, chai, assert */
+/*globals hapyak, widgetLibrary, describe, it, expect, before, chai, assert */
 'use strict';
 
 describe('DOM Tests', function () { 
@@ -60,11 +60,11 @@ describe('"hapyak" global object', function () {
     });
 
     describe('Widget', function () {
-        var isIframed = hyWidget.utils.isIframed();
+        var isIframed = widgetLibrary.utils.isIframed();
 
-        describe('hyWidget.utils object', function () {
+        describe('widgetLibrary.utils object', function () {
             it('exists', function () {
-                chai.expect(hyWidget.utils).to.exist;
+                chai.expect(widgetLibrary.utils).to.exist;
             });
             
             describe('dotget', function () {
@@ -76,7 +76,7 @@ describe('"hapyak" global object', function () {
                                 }
                             }
                         },
-                        dotgetResult = hyWidget.utils.dotget(nestedObject, 'foo.food.foodie');
+                        dotgetResult = widgetLibrary.utils.dotget(nestedObject, 'foo.food.foodie');
 
                     chai.expect(dotgetResult).to.equal('tuna');
                     chai.expect(dotgetResult).not.to.equal('groundhog');
@@ -98,7 +98,7 @@ describe('"hapyak" global object', function () {
                                  'startTimeFormat', 'startTimeValue', 'top', 'width', '_duration'];
 
                      props.forEach(function (val) {
-                        chai.expect(hyWidget.props).to.have.property(val);
+                        chai.expect(widgetLibrary.props).to.have.property(val);
                     });
                 });
 
@@ -117,7 +117,7 @@ describe('"hapyak" global object', function () {
                                 return;
                             }
 
-                            hyWidget.utils.setBaseProp(prop, size + '%');
+                            widgetLibrary.utils.setBaseProp(prop, size + '%');
 
                             setTimeout(function () {
                                 var props = hapyak.widget.getProperties();
@@ -159,7 +159,7 @@ describe('"hapyak" global object', function () {
                             var newClass = randString(),
                                 newPrecond = randString();
 
-                            hyWidget.utils.setBaseProps({
+                            widgetLibrary.utils.setBaseProps({
                                 'customClasses': newClass,
                                 'precondition': newPrecond
                             });
@@ -184,7 +184,7 @@ describe('"hapyak" global object', function () {
                 });
 
                 it('does NOT have expected widget properties when not in iframe', function () {
-                    chai.expect(hyWidget).to.equal(undefined);
+                    chai.expect(widgetLibrary).to.equal(undefined);
                 });
             });
         }
