@@ -4,7 +4,7 @@
         <title>Widget</title>
         <link rel="stylesheet" type="text/css" href="static/css/widget.css" />
         <link rel="stylesheet" type="text/css" href="vendor/materialize/0.100.2.materialize.min.css">
-        <link rel="stylesheet" type="text/css" href="//d2qrdklrsxowl2.cloudfront.net/css/generated/widget.css">
+        <link rel="stylesheet" type="text/css" href="//dev.hapyak.com/css/generated/widget.css">
     </head>
     <body>
         <div id="base-alert" class="row">
@@ -32,13 +32,15 @@
                         </div>
                         <div class="row settings-fields">
                             <div class="input-field col s12">
-                                <textarea id="title-value"
-                                    data-edit-id="title-value"
+                                <textarea id="title"
+                                    data-name="title"
+                                    data-edit-id="title"
                                     data-view-id="title"
-                                    data-input-type="text"
+                                    data-input-type="textarea"
+                                    data-input-data-type="string"
                                     data-property-type="text"
                                     class="materialize-textarea config">Welcome</textarea>
-                              <label for="title-value">Title</label>
+                              <label for="title">Title</label>
                             </div>
                         </div>
                     </div>
@@ -49,12 +51,14 @@
                         <div class="row settings-fields">
                             <div class="input-field col s12">
                                 <!-- This will be transformed by Materialize -->
-                                <select id="animal-value"
-                                        data-edit-id="animal-value"
-                                        data-view-id="animal"
-                                        data-input-type="text"
-                                        data-property-type="select"
-                                        class="config">
+                                <select id="animal"
+                                    data-name="animal"
+                                    data-edit-id="animal"
+                                    data-view-id="animal"
+                                    data-input-type="select"
+                                    data-input-data-type="string"
+                                    data-property-type="text"
+                                    class="config">
                                     <option value="" disabled selected>Animals</option>
                                     <option value="lions">Lions</option>
                                     <option value="tigers">Tigers</option>
@@ -69,37 +73,46 @@
                             <h2>Choose A Color Example</h2>
                         </div>
                         <div class="row settings-fields limit-margin-bottom">
-                            <input id="test1-value"
-                                name="group1"
+                            <input id="color-group-one"
+                                data-name="color-group"
+                                name="colorGroup"
+                                value="red"
                                 type="radio"
-                                data-edit-id="color-value"
-                                data-view-id="color"
+                                data-input-data-type="string"
+                                data-edit-id="color-group-one"
+                                data-view-id="color-group"
                                 data-input-type="radio"
-                                data-property-type="radio"
-                                class="materialize-input config" />
-                            <label for="test1-value">Red</label>
+                                data-property-type="text"
+                                class="materialize-input config radio"/>
+                            <label for="color-group-one">Red</label>
                         </div>
                         <div class="row settings-fields limit-margin-bottom">
-                            <input id="test2-value"
-                                name="group1"
+                            <input id="color-group-two"
+                                data-name="color-group"
+                                name="colorGroup"
+                                value="blue"
                                 type="radio"
-                                data-edit-id="color-value"
-                                data-view-id="color"
+                                data-input-data-type="string"
+                                data-edit-id="color-group-two"
+                                data-view-id="color-group"
                                 data-input-type="radio"
-                                data-property-type="radio"
-                                class="materialize-input config" />
-                            <label for="test2-value">Blue</label>
+                                data-property-type="text"
+                                class="materialize-input config radio"/>
+                            <label for="color-group">Blue</label>
                         </div>
                         <div class="row settings-fields limit-margin-bottom">
-                            <input id="test3-value"
-                                name="group1"
+                            <input id="color-group-three"
+                                name="colorGroup"
+                                value="green"
                                 type="radio"
-                                data-edit-id="color-value"
-                                data-view-id="color"
+                                data-name="color-group"
+                                data-input-data-type="string"
+                                data-edit-id="color-group-three"
+                                data-view-id="color-group"
                                 data-input-type="radio"
-                                data-property-type="radio"
-                                class="materialize-input config" />
-                            <label for="test3-value">Green</label>
+                                data-property-type="text"
+                                class="materialize-input config radio"/>
+                            <label for="color-group-three">Green</label>
                         </div>
                     </div>
                     <div class="section">
@@ -114,11 +127,14 @@
                                 <div class="switch">
                                     <label>
                                         Hide
-                                    <input id="first-name-value"
-                                        data-edit-id="first-name-value" 
-                                        data-input-type="boolean"
+                                    <input id="first-name"
+                                        data-name="first-name"
+                                        data-edit-id="first-name"
+                                        data-view-id="first-name"
+                                        data-input-type="input"
+                                        data-input-data-type="string"
                                         data-property-type="display"
-                                        data-view-id="first-name" class="config" checked type="checkbox">
+                                        class="config" checked type="checkbox">
                                     <span class="lever"></span>
                                         Show
                                     </label>
@@ -127,11 +143,13 @@
                         </div>
                         <div class="row settings-fields">
                             <div id="option" class="col s6 field-label">
-                                <textarea id="option-one-text-value"
-                                    data-edit-id="option-one-text-value"
-                                    data-input-type="text"
-                                    data-property-type="text"
+                                <textarea id="option-one-text"
+                                    data-name="option-one-text"
+                                    data-edit-id="option-one-text"
                                     data-view-id="option-one-text"
+                                    data-input-type="input"
+                                    data-input-data-type="string"
+                                    data-property-type="text"
                                     placeholder="Option" 
                                     class="materialize-textarea config"></textarea>
                             </div>
@@ -139,11 +157,14 @@
                                 <div class="switch">
                                     <label>
                                         Hide
-                                    <input id="option-one-value"
-                                        data-edit-id="option-one-value" 
-                                        data-input-type="boolean"
+                                    <input id="option-one"
+                                        data-name="option-one"
+                                        data-edit-id="option-one" 
+                                        data-view-id="option-one"
+                                        data-input-type="input"
+                                        data-input-data-type="boolean"
                                         data-property-type="display"
-                                        data-view-id="option-one" class="config" checked type="checkbox">
+                                        class="config" checked type="checkbox">
                                     <span class="lever"></span>
                                         Show
                                     </label>
@@ -160,11 +181,14 @@
                               Widget Background Color
                             </div>
                             <div class="input-field col s6 right-align">
-                                <input id="background-color-value"
-                                    data-edit-id="background-color-value" 
-                                    data-input-type="text"
+                                <input id="background-color"
+                                    data-name="foobar"
+                                    data-edit-id="background-color" 
+                                    data-view-id="view-container"
+                                    data-input-type="input"
+                                    data-input-data-type="string"
                                     data-property-type="background"
-                                    data-view-id="view-container" class="materialize-textarea config jscolor">
+                                    class="materialize-textarea config jscolor">
                             </div>
                         </div>
                     </div>
@@ -180,11 +204,14 @@
                                 <div class="switch">
                                     <label>
                                         Hide
-                                    <input id="skip-value"
-                                        data-edit-id="skip-value" 
-                                        data-input-type="boolean"
+                                    <input id="skip"
+                                        data-name="skip"
+                                        data-edit-id="skip"
+                                        data-view-id="skip"
+                                        data-input-type="input"
+                                        data-input-data-type="boolean"
                                         data-property-type="display"
-                                        data-view-id="skip" class="config" checked type="checkbox">
+                                        class="config" checked type="checkbox">
                                     <span class="lever"></span>
                                         Show
                                     </label>
@@ -199,11 +226,14 @@
                                 <div class="switch">
                                     <label>
                                         Inactive
-                                    <input id="gated-value"
-                                        data-edit-id="gated-value" 
-                                        data-input-type="boolean"
+                                    <input id="gated"
+                                        data-name="gated"
+                                        data-edit-id="gated" 
+                                        data-view-id="gated"
+                                        data-input-type="input"
+                                        data-input-data-type="boolean"
                                         data-property-type="display"
-                                        data-view-id="gated" class="config base-prop" checked type="checkbox">
+                                        class="config base-prop" checked type="checkbox">
                                     <span class="lever"></span>
                                         Active
                                     </label>
@@ -225,13 +255,13 @@
             </div>
         </div>
 
-        <script type="text/javascript" src="//d2qrdklrsxowl2.cloudfront.net/js/hapyak-iframe.js"></script>
-        <script type="text/javascript" src="//d2qrdklrsxowl2.cloudfront.net/js/hapyak.api.js"></script>
+        <script type="text/javascript" src="//dev.hapyak.com/js/hapyak-iframe.js"></script>
+        <script type="text/javascript" src="//dev.hapyak.com/js/hapyak.api.js"></script>
         <script type="text/javascript" src="vendor/jquery/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="vendor/materialize/0.100.2.materialize.min.js"></script>
         <script type="text/javascript" src="vendor/jscolor/jscolor.min.js"></script>
-        <script type="text/javascript" src="//d2qrdklrsxowl2.cloudfront.net/static/js/widget/v1/base.js"></script>
-        <script type="text/javascript" src="//d2qrdklrsxowl2.cloudfront.net/static/js/widget/v1/widget_edit.js"></script>
+        <script type="text/javascript" src="//dev.hapyak.com/static/js/widget/v1/base.js"></script>
+        <script type="text/javascript" src="//dev.hapyak.com/static/js/widget/v1/widget_edit.js"></script>
         <script type="text/javascript" src="static/js/widget_main.js"></script>
     </body>
 </html>
