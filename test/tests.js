@@ -1,4 +1,4 @@
-/*globals hapyak, getLibrary(), describe, it, expect, before, chai, assert */
+/*globals hapyak, describe, it, expect, before, chai, assert */
 'use strict';
 
 var getLibrary = function getLibrary () {
