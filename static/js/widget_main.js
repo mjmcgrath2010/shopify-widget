@@ -1,15 +1,16 @@
-/*globals hapyak, hyWidget */
+/*globals hapyak */
 'use strict';
 
 (function () {
     var didSetup = false,
         inEditor = false,
         widgetData = null,
+        library = null,
         init = function mainSetup (isEditMode, data) {
             widgetData = data;
-            inEditor = hyWidget.mode === 'view' &&  hapyak.widget.player.isEditMode;
+            inEditor = library.mode === 'view' &&  hapyak.widget.player.isEditMode;
 
-            if (hyWidget.mode === 'edit') {
+            if (library.mode === 'edit') {
                 return;
             }
 
@@ -23,8 +24,8 @@
                 isEditMode = hapyak.widget.player.isEditMode;
 
             if (toggleBtn) {
-                toggleBtn.style.display = isEditMode && hyWidget.mode === 'view' ? 'block' : 'none';
-                toggleBtn.addEventListener('click', hyWidget.utils.reload, false);
+                toggleBtn.style.display = isEditMode && library.mode === 'view' ? 'block' : 'none';
+                toggleBtn.addEventListener('click', library.utils.reload, false);
             }
         },
         setup = function mainSetup () {
@@ -42,9 +43,10 @@
                 Widgets may require unique events to occur before load, so this logic
                 is executed on a per widget basis.
             */
-            hyWidget.utils.startLoad();
+            library = hapyak && hapyak.widget && hapyak.widget.library || {};
+            library.utils.startLoad();
         };
 
-    hyWidget.utils.onWidgetLoad(init);
+    hapyak.widget.library.utils.onWidgetLoad(init);
     hapyak.context.addEventListener('annotationload', customLoad, false);
 }());
