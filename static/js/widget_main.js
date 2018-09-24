@@ -50,8 +50,8 @@ hapyak.myWidget = {
             return;
         }
 
-        data = Object.assign({}, values);
-
+        data = $.extend({}, values);
+        
         this.library.utils.track.event('hapyak', action, data);
     
     },
