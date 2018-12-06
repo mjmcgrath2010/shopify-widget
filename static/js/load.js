@@ -37,6 +37,7 @@
         'https://d3u7twytwz85jb.cloudfront.net/widgets/vendor/jquery/jquery-3.2.1.min.js',
         'https://d3u7twytwz85jb.cloudfront.net/widgets/vendor/materialize/0.100.2.materialize.min.js',
         'https://d3u7twytwz85jb.cloudfront.net/widgets/vendor/jscolor/jscolor.min.js',
+        'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js',
         hyHost + '/static/js/widget/v1/base.js',
         hyHost + '/static/js/widget/v1/widget_edit.js',
         'static/js/widget_main.js'

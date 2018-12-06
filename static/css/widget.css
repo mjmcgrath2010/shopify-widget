@@ -1,0 +1,8 @@
+#shopify-container {
+    background: #FFF;
+    visibility: hidden;
+}
+
+#shopify-container.active {
+    visibility: visible;
+}
