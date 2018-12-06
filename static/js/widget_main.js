@@ -1,7 +1,7 @@
 /*globals hapyak */
 'use strict';
 
-hapyak.myWidget = {
+hapyak.shopifyWidget = {
     didSetup: false,
     inEditor: false,
     widgetData: null,
@@ -64,7 +64,7 @@ hapyak.myWidget = {
 
         hapyak.widget.library.utils.startLoad();
     }
-}
+};
 
-hapyak.widget.library.utils.onWidgetLoad(hapyak.myWidget.init.bind(hapyak.myWidget));
-hapyak.context.addEventListener('iframeshow', hapyak.myWidget.customLoad, false);
+hapyak.widget.library.utils.onWidgetLoad(hapyak.shopifyWidget.init.bind(hapyak.shopifyWidget));
+hapyak.context.addEventListener('iframeshow', hapyak.shopifyWidget.customLoad, false);
