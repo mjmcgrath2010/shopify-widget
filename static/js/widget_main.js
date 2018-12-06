@@ -39,40 +39,104 @@ hapyak.shopifyWidget = {
             return;
         }
 
+        if (this.shopifyLoaded) {
+            this.shopifyConfig()
+        }
+
         this.library.utils.applyConfig(this.library.config);
         this.didSetup = true;
     },
-    shopifyConfig: function shopifyConfig(domain, apiKey, appId, node, options, idArray) {
+    shopifyConfig: function shopifyConfig(domain, accessToken, options, idsArray) {
 
-        if (!domain || !apiKey || !appId) {
-            return alert('Please make sure to setup all configs properly.')
-        }
+        // if (!domain || !apiKey || !appId) {
+        //     return alert('Please make sure to setup all configs properly.')
+        // }
 
-        this.client = this.ShopifyBuy.buildClient({
-            domain: domain,
-            apiKey: apiKey,
-            appId: appId,
+        this.client = ShopifyBuy.buildClient({
+            domain: domain || 'hapyak-test-store.myshopify.com',
+            storefrontAccessToken: accessToken || '23fedee89bcadec0487bf990c2c714d1',
         });
 
 
         // Sample Options:
-        // {
-        //     "product": {
-        //     "styles": {
-        //         "button": {
-        //             "background-color": "#292929",
-        //                 ":hover": {"background-color": "#464646"},
-        //             ":focus": {"background-color": "#464646"}
-        //         },
-        //     }
-        // }
-        // }
+        var defaultOptions = {
+            "product": {
+                "layout": "horizontal",
+                    "variantId": "all",
+                    "width": "100%",
+                    "contents": {
+                    "img": false,
+                        "imgWithCarousel": true,
+                        "variantTitle": false,
+                        "description": true,
+                        "buttonWithQuantity": false,
+                        "quantity": false
+                },
+                "styles": {
+                    "product": {
+                        "text-align": "left",
+                            "@media (min-width: 601px)": {
+                            "max-width": "100%",
+                                "margin-left": "0",
+                                "margin-bottom": "50px"
+                        }
+                    },
+                    "title": {
+                        "font-size": "26px"
+                    },
+                    "price": {
+                        "font-size": "18px"
+                    },
+                    "compareAt": {
+                        "font-size": "15px"
+                    }
+                }
+            },
+            "cart": {
+                "contents": {
+                    "button": true
+                },
+                "styles": {
+                    "footer": {
+                        "background-color": "#ffffff"
+                    }
+                }
+            },
+            "modalProduct": {
+                "contents": {
+                    "img": false,
+                        "imgWithCarousel": true,
+                        "variantTitle": false,
+                        "buttonWithQuantity": true,
+                        "button": false,
+                        "quantity": false
+                },
+                "styles": {
+                    "product": {
+                        "@media (min-width: 601px)": {
+                            "max-width": "100%",
+                                "margin-left": "0px",
+                                "margin-bottom": "0px"
+                        }
+                    }
+                }
+            },
+            "productSet": {
+                "styles": {
+                    "products": {
+                        "@media (min-width: 601px)": {
+                            "margin-left": "-20px"
+                        }
+                    }
+                }
+            }
+        };
         ShopifyBuy.UI.onReady(this.client).then(function (ui) {
             ui.createComponent('product', {
-                id: idArray,
+                id: idsArray || [1658849624164],
                 node: document.getElementById('shopify-container'),
                 moneyFormat: '%24%7B%7Bamount%7D%7D',
-                options: options
+                options: options || defaultOptions
             });
         });
     },
