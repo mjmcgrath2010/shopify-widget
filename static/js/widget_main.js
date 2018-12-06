@@ -23,12 +23,23 @@ hapyak.shopifyWidget = {
     setupToggle: function mainSetupToggle() {
         // Toggle for editing/viewing in hy edit mode
         var toggleBtn = document.getElementById('change-mode'),
-            isEditMode = hapyak.widget.player.isEditMode;
+            isEditMode = hapyak.widget.player.isEditMode,
+            addToCart = document.getElementById('add-to-cart');
 
         if (toggleBtn) {
             toggleBtn.style.display = isEditMode && this.library.mode === 'view' ? 'block' : 'none';
             toggleBtn.addEventListener('click', this.library.utils.reload, false);
         }
+
+        $('#add-to-cart').click(function(){
+            if ($('#shopify-container').hasClass('active')) {
+                hapyak.context.player.removeClass('hapyak-annotation-full-frame');
+            } else {
+                hapyak.context.player.addClass('hapyak-annotation-full-frame');
+            }
+
+            $('#shopify-container').toggleClass('active');
+        });
     },
     setup: function mainSetup() {
         this.library.utils.display('#widget-body', true);
@@ -42,6 +53,8 @@ hapyak.shopifyWidget = {
         if (this.shopifyLoaded) {
             this.shopifyConfig()
         }
+
+
 
         this.library.utils.applyConfig(this.library.config);
         this.didSetup = true;
