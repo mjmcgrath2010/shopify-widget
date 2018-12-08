@@ -7,6 +7,8 @@ hapyak.shopifyWidget = {
     widgetData: null,
     library: null,
     shopifyLoaded: false,
+    buttonText: "Add-to-Cart",
+    buttonColor: '#1892BF',
     client: {},
     annotationConfig: {},
     addStyle: function(node, style, color) {
@@ -31,10 +33,10 @@ hapyak.shopifyWidget = {
         var toggleBtn = document.getElementById('change-mode'),
             isEditMode = hapyak.widget.player.isEditMode,
             addToCart = document.getElementById('add-to-cart'),
-            configSaveBtn = document.getElementById('save-widget-config'),
-            buttonText = hapyak.shopifyWidget.annotationConfig.text.value,
-            buttonColor = "#" + hapyak.shopifyWidget.annotationConfig["background-color"].value,
-            addStyle = this.addStyle;
+            configSaveBtn = document.getElementById('save-widget-config');
+
+            this.buttonText = hapyak.shopifyWidget.annotationConfig.text.value
+            this.buttonColor = "#" + hapyak.shopifyWidget.annotationConfig["background-color"].value
 
         if (toggleBtn) {
             toggleBtn.style.display = isEditMode && this.library.mode === 'view' ? 'block' : 'none';
@@ -42,8 +44,8 @@ hapyak.shopifyWidget = {
         };
 
         if (addToCart) {
-          addStyle('add-to-cart', 'backgroundColor', buttonColor)
-          addToCart.innerHTML = buttonText
+            this.addStyle('add-to-cart', 'backgroundColor', this.buttonColor);
+            addToCart.innerHTML = this.buttonText;
         };
 
 
@@ -53,10 +55,10 @@ hapyak.shopifyWidget = {
         $('#add-to-cart').click(function(){
             if ($('#shopify-container').hasClass('active')) {
               hapyak.context.player.play();
-              addToCart.innerHTML = buttonText
+              addToCart.innerHTML = buttonText;
             } else {
               hapyak.context.player.pause();
-              addToCart.innerHTML = "Close"
+              addToCart.innerHTML = "Close";
             }
             $('#shopify-container').toggleClass('active');
         });
