@@ -1,8 +1,26 @@
+#add-to-cart.btn-visible {
+  margin-left: 100px
+}
+
+
+
+#alsdjf {
+  top: 65px;
+}
+
+#change-mode.this-button{
+  top: 65px;
+}
+
 #shopify-container {
-    background: #FFF;
+    background: #fff;
     visibility: hidden;
 }
 
 #shopify-container.active {
     visibility: visible;
+}
+
+#view-container {
+  background: transparent !important;
 }

@@ -16,12 +16,12 @@
             </div>
         </div>
     </div>
-    <div id="change-mode" class="btn-large waves-effect waves-light">
+    <div id="change-mode" class="this-button btn-large waves-effect waves-light">
         Configure
     </div>
     <div id="widget-body">
         <div id="view-container">
-            <button id="add-to-cart">Add To Cart</button>
+            <button class="btn btn-large btn-visible" id="add-to-cart">Add To Cart</button>
             <div id="shopify-container"></div>
         </div>
         <div id="edit-container">
@@ -29,133 +29,39 @@
                 <h1>Configuration</h1>
             </div>
             <div class="row body">
+              <div class="section">
+                  <div class="title row">
+                      <h2>Button Text</h2>
+                  </div>
+                  <div class="row settings-fields">
+                      <div class="input-field col s12">
+                          <textarea id="text" data-name="text" data-edit-id="text" data-view-id="text" data-input-type="textarea" data-input-data-type="string" data-property-type="text" class="materialize-textarea config"></textarea>
+                          <label for="text">Button Text</label>
+                      </div>
+                  </div>
+              </div>
+
                 <div class="section">
                     <div class="title row">
-                        <h2>Input Example</h2>
+                        <h2>Embed Code</h2>
                     </div>
                     <div class="row settings-fields">
                         <div class="input-field col s12">
-                            <textarea id="title" data-name="title" data-edit-id="title" data-view-id="title" data-input-type="textarea" data-input-data-type="string" data-property-type="text" class="materialize-textarea config">Welcome</textarea>
-                            <label for="title">Title</label>
+                            <textarea id="embed" data-name="embed" data-edit-id="embed" data-view-id="embed" data-input-type="textarea" data-input-data-type="string" data-property-type="text" class="materialize-textarea config"></textarea>
+                            <label for="embed">Embed Code</label>
                         </div>
                     </div>
                 </div>
                 <div class="section">
                     <div class="title row">
-                        <h2>Choose an Animal</h2>
-                    </div>
-                    <div class="row settings-fields">
-                        <div class="input-field col s12">
-                            <!-- This will be transformed by Materialize -->
-                            <select id="animal" data-name="animal" data-edit-id="animal" data-view-id="animal" data-input-type="select" data-input-data-type="string" data-property-type="text" class="config">
-                                <option value="" disabled selected>Animals</option>
-                                <option value="lions">Lions</option>
-                                <option value="tigers">Tigers</option>
-                                <option value="bears">Bears</option>
-                            </select>
-                            <label>Animals</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="section">
-                    <div class="title row">
-                        <h2>Choose A Color Example</h2>
-                    </div>
-                    <div class="row settings-fields limit-margin-bottom">
-                        <input id="color-group-one" data-name="color-group" name="colorGroup" value="red" type="radio" data-input-data-type="string" data-edit-id="color-group-one" data-view-id="color-group" data-input-type="radio" data-property-type="text" class="materialize-input config radio" />
-                        <label for="color-group-one">Red</label>
-                    </div>
-                    <div class="row settings-fields limit-margin-bottom">
-                        <input id="color-group-two" data-name="color-group" name="colorGroup" value="blue" type="radio" data-input-data-type="string" data-edit-id="color-group-two" data-view-id="color-group" data-input-type="radio" data-property-type="text" class="materialize-input config radio" />
-                        <label for="color-group-two">Blue</label>
-                    </div>
-                    <div class="row settings-fields limit-margin-bottom">
-                        <input id="color-group-three" name="colorGroup" value="green" type="radio" data-name="color-group" data-input-data-type="string" data-edit-id="color-group-three" data-view-id="color-group" data-input-type="radio" data-property-type="text" class="materialize-input config radio" />
-                        <label for="color-group-three">Green</label>
-                    </div>
-                </div>
-                <div class="section">
-                    <div class="title row">
-                        <h2>Toggle Example</h2>
-                    </div>
-                    <div class="row settings-fields margin-bottom">
-                        <div class="col s6 field-label">
-                            First Name
-                        </div>
-                        <div class="col s6 right-align">
-                            <div class="switch">
-                                <label>
-                                    Hide
-                                    <input id="first-name" data-name="first-name" data-edit-id="first-name" data-view-id="first-name" data-input-type="input" data-input-data-type="string" data-property-type="display" class="config" checked type="checkbox">
-                                    <span class="lever"></span> Show
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row settings-fields">
-                        <div id="option" class="col s6 field-label">
-                            <textarea id="option-one-text" data-name="option-one-text" data-edit-id="option-one-text" data-view-id="option-one-text" data-input-type="input" data-input-data-type="string" data-property-type="text" placeholder="Option" class="materialize-textarea config"></textarea>
-                        </div>
-                        <div class="col s6 right-align">
-                            <div class="switch">
-                                <label>
-                                    Hide
-                                    <input id="option-one" data-name="option-one" data-edit-id="option-one" data-view-id="option-one" data-input-type="input" data-input-data-type="boolean" data-property-type="display" class="config" checked type="checkbox">
-                                    <span class="lever"></span> Show
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="section">
-                    <div class="title row">
-                        <h2>Color Example JsColor</h2>
+                        <h2>Button Color</h2>
                     </div>
                     <div class="row settings-fields">
                         <div class="input-field col s6 field-label">
-                            Widget Background Color
+                            Call To Action Button Color
                         </div>
                         <div class="input-field col s6 right-align">
                             <input id="background-color" data-name="background-color" data-edit-id="background-color" data-view-id="view-container" data-input-type="input" data-input-data-type="string" data-property-type="background" class="materialize-textarea config jscolor">
-                        </div>
-                    </div>
-                </div>
-                <div class="section">
-                    <div class="title row">
-                        <h2>Option Example</h2>
-                    </div>
-                    <div class="row margin-bottom settings-fields">
-                        <div class="col s6 field-label">
-                            Skip
-                        </div>
-                        <div class="col s6 right-align">
-                            <div class="switch">
-                                <label>
-                                    Hide
-                                    <input id="skip" data-name="skip" data-edit-id="skip" data-view-id="skip" data-input-type="input" data-input-data-type="boolean" data-property-type="display" class="config" checked type="checkbox">
-                                    <span class="lever"></span> Show
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row margin-bottom settings-fields">
-                        <div class="col s6 field-label">
-                            Gated
-                        </div>
-                        <div class="col s6 right-align">
-                            <div class="switch">
-                                <label>
-                                    Inactive
-                                    <input id="gated" data-name="gated" data-edit-id="gated" data-view-id="gated" data-input-type="input" data-input-data-type="boolean" data-property-type="display" class="config base-prop" checked type="checkbox">
-                                    <span class="lever"></span> Active
-                                </label>
-                            </div>
-                        </div>
-                        <div class="hide">
-                            <div id="hidden-data-here" data-name="where-is-big-foot" data-location="canada" data-input-data-type="string" data-property-type="location" class="config">
-                            </div>
-                            <div id="hidden-data-here-2" data-name="where-is-big-foot" data-fur-color="white" data-eye-color="blue" class="config">
-                            </div>
                         </div>
                     </div>
                 </div>
