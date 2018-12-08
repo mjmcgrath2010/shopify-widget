@@ -8,14 +8,20 @@ hapyak.shopifyWidget = {
     library: null,
     shopifyLoaded: false,
     client: {},
+    annotationConfig: {},
+    addStyle: function(node, style, color) {
+        var target = document.getElementById(node);
+
+        target.style[style] = color;
+    },
     init: function mainSetup(isEditMode, data) {
         this.widgetData = data;
         this.library = hapyak && hapyak.widget && hapyak.widget.library || {};
         this.inEditor = this.library.mode === 'view' && hapyak.widget.player.isEditMode;
-
+        this.annotationConfig = hapyak && hapyak.context && hapyak.context.annotationConfig || {};
         if (this.library.mode === 'edit') {
             return;
-        }
+        };
 
         hapyak.widget.stopEditing();
         this.setup();
@@ -24,22 +30,37 @@ hapyak.shopifyWidget = {
         // Toggle for editing/viewing in hy edit mode
         var toggleBtn = document.getElementById('change-mode'),
             isEditMode = hapyak.widget.player.isEditMode,
-            addToCart = document.getElementById('add-to-cart');
+            addToCart = document.getElementById('add-to-cart'),
+            configSaveBtn = document.getElementById('save-widget-config'),
+            buttonText = hapyak.shopifyWidget.annotationConfig.text.value,
+            buttonColor = "#" + hapyak.shopifyWidget.annotationConfig["background-color"].value,
+            addStyle = this.addStyle;
 
         if (toggleBtn) {
             toggleBtn.style.display = isEditMode && this.library.mode === 'view' ? 'block' : 'none';
             toggleBtn.addEventListener('click', this.library.utils.reload, false);
-        }
+        };
+
+        if (addToCart) {
+          addStyle('add-to-cart', 'backgroundColor', buttonColor)
+          addToCart.innerHTML = buttonText
+        };
+
+
+        hapyak.context.player.addClass('hapyak-annotation-full-frame');
+
 
         $('#add-to-cart').click(function(){
             if ($('#shopify-container').hasClass('active')) {
-                hapyak.context.player.removeClass('hapyak-annotation-full-frame');
+              hapyak.context.player.play();
+              addToCart.innerHTML = buttonText
             } else {
-                hapyak.context.player.addClass('hapyak-annotation-full-frame');
+              hapyak.context.player.pause();
+              addToCart.innerHTML = "Close"
             }
-
             $('#shopify-container').toggleClass('active');
         });
+
     },
     setup: function mainSetup() {
         this.library.utils.display('#widget-body', true);
@@ -53,8 +74,6 @@ hapyak.shopifyWidget = {
         if (this.shopifyLoaded) {
             this.shopifyConfig()
         }
-
-
 
         this.library.utils.applyConfig(this.library.config);
         this.didSetup = true;
@@ -160,15 +179,14 @@ hapyak.shopifyWidget = {
         var dotget = this.library.utils.dotget;
 
         var data;
-        
+
         if(!action || !mode || !values) {
             return;
         }
 
         data = $.extend({}, values);
-        
+
         this.library.utils.track.event('hapyak', action, data);
-    
     },
     loadScript: function loadScript() {
         var script = document.createElement('script'),
@@ -191,6 +209,7 @@ hapyak.shopifyWidget = {
         window.ShopifyBuy && window.ShopifyBuy.UI ? hapyak.shopifyWidget.shopifyLoaded = true : hapyak.shopifyWidget.loadScript();
 
         hapyak.widget.library.utils.startLoad();
+
     }
 };
 
