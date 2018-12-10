@@ -88,19 +88,19 @@ hapyak.shopifyWidget = {
 
         if (hapyak.shopifyWidget.annotationConfig["access-token"].value !== "") {
           accessToken = hapyak.shopifyWidget.annotationConfig["access-token"].value
-        }
+        };
 
         if (hapyak.shopifyWidget.annotationConfig["store-url"].value !== "") {
           domain = hapyak.shopifyWidget.annotationConfig["store-url"].value
-        }
+        };
 
         if (hapyak.shopifyWidget.annotationConfig["arrays-id"].value !== "") {
           var array = [],
               num;
-          num = parseInt(hapyak.shopifyWidget.annotationConfig["arrays-id"].value)
-          array.push(num)
-          idsArray = array
-        }
+          num = parseInt(hapyak.shopifyWidget.annotationConfig["arrays-id"].value);
+          array.push(num);
+          idsArray = array;
+        };
 
         this.client = ShopifyBuy.buildClient({
             domain: domain || 'hapyak-test-store.myshopify.com',
