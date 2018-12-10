@@ -55,7 +55,7 @@ hapyak.shopifyWidget = {
         $('#add-to-cart').click(function(){
             if ($('#shopify-container').hasClass('active')) {
               hapyak.context.player.play();
-              addToCart.innerHTML = buttonText;
+              addToCart.innerHTML = hapyak.shopifyWidget.buttonText;
             } else {
               hapyak.context.player.pause();
               addToCart.innerHTML = "Close";
@@ -86,10 +86,27 @@ hapyak.shopifyWidget = {
         //     return alert('Please make sure to setup all configs properly.')
         // }
 
+        if (hapyak.shopifyWidget.annotationConfig["access-token"].value !== "") {
+          accessToken = hapyak.shopifyWidget.annotationConfig["access-token"].value
+        }
+
+        if (hapyak.shopifyWidget.annotationConfig["store-url"].value !== "") {
+          domain = hapyak.shopifyWidget.annotationConfig["store-url"].value
+        }
+
+        if (hapyak.shopifyWidget.annotationConfig["arrays-id"].value !== "") {
+          var array = [],
+              num;
+          num = parseInt(hapyak.shopifyWidget.annotationConfig["arrays-id"].value)
+          array.push(num)
+          idsArray = array
+        }
+
         this.client = ShopifyBuy.buildClient({
             domain: domain || 'hapyak-test-store.myshopify.com',
             storefrontAccessToken: accessToken || '23fedee89bcadec0487bf990c2c714d1',
         });
+
 
 
         // Sample Options:
