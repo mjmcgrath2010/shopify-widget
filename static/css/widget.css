@@ -1,5 +1,6 @@
 #add-to-cart.btn-visible {
-  margin-left: 100px
+    margin-left: 1061px;
+    margin-top: 10px;
 }
 
 
@@ -9,7 +10,8 @@
 }
 
 #change-mode.this-button{
-  top: 65px;
+  margin-top: 10px;
+  top: 70px;
 }
 
 #shopify-container {
